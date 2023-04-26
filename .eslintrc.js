@@ -23,6 +23,8 @@ module.exports = {
     'import/no-unresolved': 0,
     'import/no-extraneous-dependencies': 0, // 테스트 또는 개발환경을 구성하는 파일에서는 devDependency 사용을 허용
     'no-use-before-define': 2,
+    // 화살표 함수, 브라켓 필수 + 괄호 생략 가능
+    'arrow-parens': [0, 'as-needed', { requireForBlockBody: true }],
     'react/react-in-jsx-scope': 0,
     'no-shadow': 0,
     'react/prop-types': 0,
