@@ -1,20 +1,15 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useRouterTo } from '../../../hooks/useRouterTo';
+import { getUserTokenInLocalStorage } from '../../../utils/localTokenUtils';
 
 export default function AuthLayout({ children, withAuth, redirectPath = '/' }) {
-  const authToken = localStorage.getItem('access_token');
+  const { routerTo } = useRouterTo();
 
-  if (withAuth) {
-    if (authToken) {
-      return children;
-    }
-    return <Navigate to={redirectPath} />;
-  }
+  useEffect(() => {
+    const authToken = getUserTokenInLocalStorage();
+    if (withAuth && !authToken) routerTo(redirectPath, true);
+    if (!withAuth && authToken) routerTo(redirectPath, true);
+  }, []);
 
-  if (!withAuth) {
-    if (authToken) {
-      return <Navigate to={redirectPath} />;
-    }
-    return children;
-  }
+  return children;
 }

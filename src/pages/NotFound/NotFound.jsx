@@ -1,5 +1,5 @@
 function NotFound() {
-  return <h1>팀장을 맡게되서</h1>;
+  return <h1>오류 페이지 메인페이지로 이동하세요...</h1>;
 }
 
 export default NotFound;

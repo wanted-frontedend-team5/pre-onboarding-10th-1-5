@@ -4,8 +4,8 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
-import SignIn from '../pages/SignIn/SignIn';
-import SignUp from '../pages/SignUp/SignUp';
+import SignInForm from '../pages/SignIn/SignInForm';
+import SignUpForm from '../pages/SignUp/SignUpForm';
 import AuthLayout from '../components/HOC/auth/AuthLayout';
 import Todo from '../pages/Todo/Todo';
 import NotFound from '../pages/NotFound/NotFound';
@@ -15,17 +15,16 @@ const rootRouterElements = [
     path: '/',
     element: <Navigate to="/signin" />,
     withAuth: false,
-    errorElement: <NotFound />,
   },
   {
     path: '/signin',
-    element: <SignIn />,
+    element: <SignInForm />,
     withAuth: false,
     redirectPath: '/todo',
   },
   {
     path: '/signup',
-    element: <SignUp />,
+    element: <SignUpForm />,
     withAuth: false,
     redirectPath: '/todo',
   },
@@ -47,12 +46,14 @@ const router = createBrowserRouter(
             {page.element}
           </AuthLayout>
         ),
+        errorElement: <NotFound />,
       };
     }
 
     return {
       path: page.path,
       element: page.element,
+      errorElement: <NotFound />,
     };
   }),
 );

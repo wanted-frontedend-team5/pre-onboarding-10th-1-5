@@ -6,9 +6,7 @@ export const putUserTokenInLocalStorage = token => {
   localStorage.setItem(tokenKey, token);
 };
 
-export const getUserTokenInLocalStorage = () => {
-  localStorage.getItem(tokenKey);
-};
+export const getUserTokenInLocalStorage = () => localStorage.getItem(tokenKey);
 
 export const removeUserTokenInLocalStorage = () => {
   localStorage.removeItem(tokenKey);
