@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
@@ -12,12 +11,9 @@ function SignUp() {
     '',
     validationEmail,
   );
-
-  const [password, setPassword] = useState('');
-  const [isPasswordSuccess, setIsPasswordSuccess] = useState({
-    isSuccess: false,
-    errorMessage: '',
-  });
+  // eslint-disable-next-line operator-linebreak
+  const [password, isPasswordSuccess, handleChangePassword] =
+    useInputValidation('', validationPassword);
 
   const isSuccess = isEmailSuccess.isSuccess && isPasswordSuccess.isSuccess;
   const navigate = useNavigate();
@@ -25,12 +21,6 @@ function SignUp() {
   const pathData = {
     email: '',
     password: '',
-  };
-
-  const handleChangePassword = e => {
-    const { value } = e.target;
-    setPassword(value);
-    validationPassword(value, setIsPasswordSuccess);
   };
 
   const handleClick = async e => {
@@ -50,6 +40,7 @@ function SignUp() {
       <h1 className="text-3xl">Sign Up</h1>
       <form className="space-y-1">
         <Input
+          type="email"
           label="Email"
           dataTestid="email-input"
           id="signup__email-input"
@@ -58,6 +49,7 @@ function SignUp() {
           errorMessage={isEmailSuccess.errorMessage}
         />
         <Input
+          type="password"
           label="Password"
           dataTestid="password-input"
           id="signup__password-input"

@@ -16,7 +16,7 @@ function Input({
       {label}
       <input
         data-testid={dataTestid}
-        placeholder="Password"
+        placeholder={label}
         onChange={onChange}
         type={type}
         id={id}
