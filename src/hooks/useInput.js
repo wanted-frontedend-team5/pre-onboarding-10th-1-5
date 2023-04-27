@@ -8,7 +8,11 @@ function useInput(initialForm) {
     setForm(form => ({ ...form, [name]: value }));
   }, []);
 
-  return [form, onChange];
+  const setValue = useCallback((name, value) => {
+    setForm(form => ({ ...form, [name]: value }));
+  }, []);
+
+  return [form, onChange, setValue];
 }
 
 export default useInput;
