@@ -12,7 +12,7 @@ function AddTodoForm({ refreshHandler }) {
 
     e.currentTarget.reset();
 
-    await todoApi.createTodo(myStr);
+    await todoApi.createTodo({ todo: myStr });
     await refreshHandler();
   };
 
