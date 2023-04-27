@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
-import postSignIn from '../../apis/postSignIn';
+import authApi from '../../api/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -43,7 +43,7 @@ function SignIn() {
     pathData.email = email;
     pathData.password = password;
     try {
-      const data = await postSignIn(pathData);
+      const data = await authApi.signIn(pathData);
       localStorage.setItem('access_token', data.access_token);
       if (localStorage.getItem('access_token')) navigate('/todo');
     } catch (error) {

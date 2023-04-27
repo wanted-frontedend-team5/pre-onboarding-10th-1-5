@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import Input from '../../components/Input';
-import postSignUp from '../../apis/postSignUp';
+import authApi from '../../api/auth';
 import useInputValidation from '../../hooks/useInputValidation';
 import Button from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -29,7 +29,7 @@ function SignUp() {
     pathData.email = email;
     pathData.password = password;
     try {
-      await postSignUp(pathData);
+      await authApi.signUp(pathData);
       navigate('/signin');
     } catch (error) {
       console.error(error);
