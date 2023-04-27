@@ -1,4 +1,4 @@
-import globalStyle from '../utils/globalStyle';
+import globalStyle from '../../utils/globalStyle';
 
 function SubmitButton({ dataTestid, children, isSuccess = true }) {
   return (

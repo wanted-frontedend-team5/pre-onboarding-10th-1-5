@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import todoApi from '../../api/todo';
 import ModifyTodoForm from './ModifyTodoForm';
-import DefaultButton from '../DefaultButton';
+import DefaultButton from '../buttons/DefaultButton';
 
 function Todo({ todo, refreshHandler }) {
   const [modifyMode, setModifyMode] = useState(false);

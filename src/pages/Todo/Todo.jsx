@@ -17,7 +17,7 @@ function Todo() {
 
   return (
     <div className=" w-full">
-      <h1 className="text-3xl">투두리스트 페이지 입니다.</h1>
+      <h1 className="text-2xl">투두리스트 페이지 입니다.</h1>
       <AddTodoForm refreshHandler={fetchTodoRequest} />
       <hr />
       <TodoList todoList={todoList} fetchTodoRequest={fetchTodoRequest} />

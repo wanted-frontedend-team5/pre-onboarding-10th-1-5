@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import todoApi from '../../api/todo';
-import DefaultButton from '../DefaultButton';
-import Input from '../Input';
+import DefaultButton from '../buttons/DefaultButton';
+import Input from '../inputs/Input';
 
 function AddTodoForm({ refreshHandler }) {
   const [myTodo, setMyTodo] = useState();

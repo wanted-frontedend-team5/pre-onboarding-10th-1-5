@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import authApi from '../../api/auth';
-import Input from '../../components/Input';
-import SubmitButton from '../../components/SubmitButton';
+import Input from '../../components/inputs/Input';
+import SubmitButton from '../../components/buttons/SubmitButton';
 import ErrorMessage from '../../components/ErrorMessage';
 import useInputValidation from '../../hooks/useInputValidation';
 import {
