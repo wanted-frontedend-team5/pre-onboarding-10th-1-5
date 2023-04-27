@@ -1,30 +1,42 @@
+import { useState } from 'react';
 import todoApi from '../../api/todo';
+import DefaultButton from '../DefaultButton';
+import Input from '../Input';
 
 function AddTodoForm({ refreshHandler }) {
+  const [myTodo, setMyTodo] = useState();
+
+  const onChangeHandler = e => {
+    setMyTodo(e.currentTarget.value);
+  };
+
   const todoSubmitHandler = async e => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    if (myTodo.trim().length === 0) return;
 
-    const myStr = formData.get('myTodo');
+    await todoApi.createTodo({ todo: myTodo });
 
-    if (!myStr) return;
-
-    e.currentTarget.reset();
-
-    await todoApi.createTodo({ todo: myStr });
+    setMyTodo('');
     await refreshHandler();
   };
 
   return (
     <form onSubmit={todoSubmitHandler}>
-      <label htmlFor="myTodo">
-        할 일 작성 :
-        <input name="myTodo" type="text" data-testid="new-todo-input" />
-      </label>
-      <button type="submit" data-testid="new-todo-add-button">
+      <Input
+        type="text"
+        label="할 일 작성"
+        dataTestid="new-todo-input"
+        id="myTodo"
+        value={myTodo}
+        onChange={onChangeHandler}
+      />
+      <DefaultButton
+        onClick={todoSubmitHandler}
+        data-testid="new-todo-add-button"
+      >
         추가
-      </button>
+      </DefaultButton>
     </form>
   );
 }

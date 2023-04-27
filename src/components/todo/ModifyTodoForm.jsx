@@ -1,21 +1,25 @@
+import { useState } from 'react';
 import todoApi from '../../api/todo';
+import DefaultButton from '../DefaultButton';
+import Input from '../Input';
+import SubmitButton from '../SubmitButton';
 
 function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
+  const [modifyTodo, setMyTodo] = useState();
+
+  const onChangeHandler = e => {
+    setMyTodo(e.currentTarget.value);
+  };
+
   const todoSubmitHandler = async e => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    const myStr = formData.get('myTodo');
-
+    if (modifyTodo.trim().length === 0) return;
     const info = {
       id: todo.id,
-      todo: myStr,
+      todo: modifyTodo,
       isCompleted: todo.isCompleted,
     };
-
-    await todoApi.updateTodo(info);
-
-    if (!myStr) return;
 
     await todoApi.updateTodo(info);
 
@@ -25,16 +29,22 @@ function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
 
   return (
     <form onSubmit={todoSubmitHandler}>
-      <label htmlFor="myTodo">
-        수정할 작성 :
-        <input name="myTodo" type="text" data-testid="modify-input" />
-      </label>
-      <button type="submit" data-testid="submit-button">
-        제출
-      </button>
-      <button type="button" data-testid="cancel-button" onClick={closeHandler}>
+      <Input
+        type="text"
+        label="수정할 Todo 작성"
+        dataTestid="modify-input"
+        id="myTodo"
+        value={modifyTodo}
+        onChange={onChangeHandler}
+      />
+      <SubmitButton data-testid="submit-button">추가</SubmitButton>
+      <DefaultButton
+        type="button"
+        data-testid="cancel-button"
+        onClick={closeHandler}
+      >
         취소
-      </button>
+      </DefaultButton>
     </form>
   );
 }

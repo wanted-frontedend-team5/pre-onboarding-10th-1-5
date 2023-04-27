@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import todoApi from '../../api/todo';
 import ModifyTodoForm from './ModifyTodoForm';
+import DefaultButton from '../DefaultButton';
 
 function Todo({ todo, refreshHandler }) {
   const [modifyMode, setModifyMode] = useState(false);
@@ -35,30 +36,28 @@ function Todo({ todo, refreshHandler }) {
         />
       )}
       {!modifyMode && (
-        <label>
-          <input
-            type="checkbox"
-            onChange={updateCheckedHandler}
-            checked={todo.isCompleted}
-          />
-          <span>{todo.todo}</span>
-
-          <button
-            type="button"
+        <>
+          <p>
+            <input
+              type="checkbox"
+              onChange={updateCheckedHandler}
+              checked={todo.isCompleted}
+            />
+            {todo.todo}
+          </p>
+          <DefaultButton
             data-testid="modify-button"
             onClick={modifyFormHandler}
           >
             수정
-          </button>
-
-          <button
-            type="button"
+          </DefaultButton>
+          <DefaultButton
             data-testid="delete-button"
             onClick={deleteTodoHandler}
           >
             삭제
-          </button>
-        </label>
+          </DefaultButton>
+        </>
       )}
     </li>
   );

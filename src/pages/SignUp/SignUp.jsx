@@ -4,7 +4,7 @@ import validationPassword from '../../utils/validationPassword';
 import Input from '../../components/Input';
 import authApi from '../../api/auth';
 import useInputValidation from '../../hooks/useInputValidation';
-import Button from '../../components/Button';
+import SubmitButton from '../../components/SubmitButton';
 import ErrorMessage from '../../components/ErrorMessage';
 
 function SignUp() {
@@ -39,7 +39,7 @@ function SignUp() {
   return (
     <div className="w-full">
       <h1 className="text-3xl">Sign Up</h1>
-      <form className="space-y-1">
+      <form className="space-y-1" onSubmit={handleClick}>
         <Input
           type="email"
           label="Email"
@@ -59,13 +59,9 @@ function SignUp() {
           errorMessage={isPasswordSuccess.errorMessage}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
-        <Button
-          onClick={handleClick}
-          data-testid="signup-button"
-          isSuccess={isSuccess}
-        >
+        <SubmitButton data-testid="signup-button" isSuccess={isSuccess}>
           Sign Up
-        </Button>
+        </SubmitButton>
       </form>
     </div>
   );

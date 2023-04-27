@@ -3,7 +3,7 @@ import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import authApi from '../../api/auth';
 import Input from '../../components/Input';
-import Button from '../../components/Button';
+import SubmitButton from '../../components/SubmitButton';
 import ErrorMessage from '../../components/ErrorMessage';
 import useInputValidation from '../../hooks/useInputValidation';
 import {
@@ -44,7 +44,7 @@ function SignIn() {
   return (
     <div className=" w-full">
       <h1 className="text-3xl">Sign In</h1>
-      <form className=" space-y-1">
+      <form className=" space-y-1" onSubmit={handleClick}>
         <Input
           type="email"
           label="Email"
@@ -63,13 +63,9 @@ function SignIn() {
           onChange={handleChangePassword}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
-        <Button
-          onClick={handleClick}
-          data-testid="signin-button"
-          isSuccess={isSuccess}
-        >
+        <SubmitButton data-testid="signin-button" isSuccess={isSuccess}>
           Sign In
-        </Button>
+        </SubmitButton>
       </form>
     </div>
   );
