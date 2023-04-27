@@ -5,6 +5,7 @@ import validationPassword from '../../components/validationPassword';
 import EmailInput from '../../components/EmailInput';
 import PasswordInput from '../../components/PasswordInput';
 import { UIStyle } from '../../components/globalStyle';
+import postSignUp from '../../apis/postSignUp';
 
 function SignUp() {
   const [email, setEmail] = useState('');
