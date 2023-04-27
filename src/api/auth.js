@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { axiosInstance } from './client';
+import { axiosInstance } from './axiosInstance';
 
 const signIn = async loginData => {
   try {
