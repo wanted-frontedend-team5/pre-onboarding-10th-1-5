@@ -6,6 +6,10 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
 import useInputValidation from '../../hooks/useInputValidation';
+import {
+  getUserTokenInLocalStorage,
+  putUserTokenInLocalStorage,
+} from '../../utils/localTokenUtils';
 
 function SignIn() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -13,7 +17,6 @@ function SignIn() {
     validationEmail,
   );
 
-  // eslint-disable-next-line operator-linebreak
   const [password, isPasswordSuccess, handleChangePassword] =
     useInputValidation('', validationPassword);
 
@@ -31,8 +34,8 @@ function SignIn() {
     pathData.password = password;
     try {
       const data = await authApi.signIn(pathData);
-      localStorage.setItem('access_token', data.access_token);
-      if (localStorage.getItem('access_token')) navigate('/todo');
+      putUserTokenInLocalStorage(data.access_token);
+      if (getUserTokenInLocalStorage()) navigate('/todo');
     } catch (error) {
       console.error(error);
     }
