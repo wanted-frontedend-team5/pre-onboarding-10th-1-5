@@ -4,7 +4,7 @@ import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import postSignIn from '../../apis/postSignIn';
 import Input from '../../components/Input';
-import globalStyle from '../../utils/globalStyle';
+import Button from '../../components/Button';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -73,15 +73,13 @@ function SignIn() {
           onChange={handleChangePassword}
           errorMessage={isPasswordSuccess.errorMessage}
         />
-        <button
-          className={globalStyle.buttonStyle}
+        <Button
           onClick={handleClick}
-          type="submit"
           data-testid="signin-button"
-          disabled={isSuccess ? null : 'disabled'}
+          isSuccess={isSuccess}
         >
           Sign In
-        </button>
+        </Button>
       </form>
     </div>
   );
