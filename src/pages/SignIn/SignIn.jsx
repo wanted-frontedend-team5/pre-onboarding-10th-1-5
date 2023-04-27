@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { api } from '../../api/auth';
+import { authAPI } from '../../api/auth';
 import Input from '../../components/\bcommon/input/Input';
 import { lengthLimit } from '../../constant/passwordRule';
 
@@ -28,7 +28,7 @@ function SignIn() {
   };
 
   const register = async () => {
-    const response = await api.post('/auth/signin', {
+    const response = await authAPI.post('/auth/signin', {
       email,
       password,
     });

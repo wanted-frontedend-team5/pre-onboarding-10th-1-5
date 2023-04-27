@@ -1,15 +1,7 @@
-import axios from 'axios';
 import { useState } from 'react';
+import { authAPI } from '../../api/auth';
 import Input from '../../components/\bcommon/input/Input';
 import { lengthLimit } from '../../constant/passwordRule';
-
-const host = 'https://www.pre-onboarding-selection-task.shop/';
-const api = axios.create({
-  baseURL: host,
-  Headers: {
-    'Content-Type': 'application/json',
-  },
-});
 
 function SignUp() {
   const [validEmail, setValidEmail] = useState(false);
@@ -36,11 +28,11 @@ function SignUp() {
   };
 
   const register = async () => {
-    const response = await api.post('/auth/signup', {
+    await authAPI.post('/auth/signup', {
       email,
       password,
     });
-    console.log(response);
+    // console.log(response);
     window.location.replace('/signin');
     // .catch((err) => console.log(err));
   };
