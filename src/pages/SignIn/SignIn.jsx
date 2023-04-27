@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import ErrorMessage from '../../components/common/ErrorMessage';
@@ -6,6 +7,9 @@ import useInput from '../../hooks/common/useInput';
 import authApi from '../../api/auth';
 
 function SignIn() {
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
   const [{ email, password }, onChange] = useInput({
     email: '',
     password: '',
@@ -24,9 +28,16 @@ function SignIn() {
   const login = async () => {
     const res = await authApi.signIn(loginData);
     const token = res.data.access_token;
-
+    if (res?.status === 401) {
+      return setError(res.data.message);
+    }
+    if (res?.status === 404) {
+      return setError(res.data.message);
+    }
     if (res?.status === 200 && token) {
       localStorage.setItem('access_token', JSON.stringify(token));
+
+      return navigate('/todo');
     }
   };
 
@@ -34,6 +45,8 @@ function SignIn() {
     e.preventDefault();
     if (!checkValid) {
       login();
+    } else {
+      setError('비밀번호를 8자 이상 입력하세요');
     }
   };
 
@@ -66,7 +79,7 @@ function SignIn() {
             required
             dataTestid="password-input"
           />
-          <ErrorMessage>error</ErrorMessage>
+          <ErrorMessage>{error}</ErrorMessage>
           <Button bgcolor="accentColor" txtcolor="txtwhite">
             Sign In
           </Button>
