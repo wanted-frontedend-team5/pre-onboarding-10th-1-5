@@ -4,7 +4,6 @@ function Input({
   dataTestid,
   type,
   label,
-  errorMessage,
   id,
   onChange,
   value,
@@ -25,7 +24,6 @@ function Input({
           disabled ? 'bg-gray-100' : 'bg-white'
         } ${className}`}
       />
-      <p className="text-red-500 text-sm">{errorMessage}</p>
     </label>
   );
 }

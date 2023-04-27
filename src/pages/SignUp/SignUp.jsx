@@ -2,9 +2,10 @@ import { useNavigate } from 'react-router';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import Input from '../../components/Input';
-import globalStyle from '../../utils/globalStyle';
 import postSignUp from '../../apis/postSignUp';
 import useInputValidation from '../../hooks/useInputValidation';
+import Button from '../../components/Button';
+import ErrorMessage from '../../components/ErrorMessage';
 
 function SignUp() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -46,8 +47,8 @@ function SignUp() {
           id="signup__email-input"
           value={email}
           onChange={handleChangeEmail}
-          errorMessage={isEmailSuccess.errorMessage}
         />
+        <ErrorMessage errorMessage={isEmailSuccess.errorMessage} />
         <Input
           type="password"
           label="Password"
@@ -57,15 +58,13 @@ function SignUp() {
           onChange={handleChangePassword}
           errorMessage={isPasswordSuccess.errorMessage}
         />
-        <button
-          className={globalStyle.buttonStyle}
+        <Button
           onClick={handleClick}
-          type="submit"
           data-testid="signup-button"
-          disabled={isSuccess ? null : 'disabled'}
+          isSuccess={isSuccess}
         >
           Sign Up
-        </button>
+        </Button>
       </form>
     </div>
   );
