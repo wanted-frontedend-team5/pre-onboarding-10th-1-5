@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import validationEmail from '../../components/validationEmail';
@@ -52,13 +52,6 @@ function SignIn() {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    if (localStorage.getItem('access_token')) {
-      navigate('/todo');
-    }
-  }, []);
-
   return (
     <div className=" w-full">
       <h1 className="text-3xl">Sign In</h1>

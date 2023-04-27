@@ -1,8 +1,7 @@
-import { inputStyle } from './globalStyle';
+import { UIStyle } from './globalStyle';
 
 function PasswordInput({
   errorMessage,
-  state,
   id,
   onChange,
   value,
@@ -14,17 +13,16 @@ function PasswordInput({
       Password
       <input
         data-testid="password-input"
-        // state={state}
         placeholder="Password"
         onChange={onChange}
         type="password"
         id={id}
         value={value}
-        className={`${inputStyle}${
+        className={`${UIStyle.inputStyle}${
           disabled ? 'bg-gray-100' : 'bg-white'
         } ${className}`}
       />
-      {state ? null : <p className="text-red-500 text-sm">{errorMessage}</p>}
+      <p className="text-red-500 text-sm">{errorMessage}</p>
     </label>
   );
 }
