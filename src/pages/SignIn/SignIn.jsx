@@ -80,7 +80,11 @@ function SignIn() {
             dataTestid="password-input"
           />
           <ErrorMessage>{error}</ErrorMessage>
-          <Button bgcolor="accentColor" txtcolor="txtwhite">
+          <Button
+            bgcolor="accentColor"
+            txtcolor="txtwhite"
+            disalbed={checkValid}
+          >
             Sign In
           </Button>
           <Link to="/signup">회원가입 하러가기 ➡</Link>
