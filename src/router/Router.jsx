@@ -1,48 +1,68 @@
 import React from 'react';
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from 'react-router-dom';
-import SignInForm from '../pages/SignIn/SignInForm';
-import SignUpForm from '../pages/SignUp/SignUpForm';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AuthLayout from '../components/HOC/auth/AuthLayout';
 import Todo from '../pages/Todo/Todo';
 import NotFound from '../pages/NotFound/NotFound';
+import SignUp from '../pages/SignUp/SignUp';
+import SignIn from '../pages/SignIn/SignIn';
 
-const rootRouterElements = [
+export const rootRouterElements = [
   {
+    id: 1,
     path: '/',
+    name: '메인페이지',
     element: <Navigate to="/signin" />,
     withAuth: false,
   },
   {
+    id: 2,
     path: '/signin',
-    element: <SignInForm />,
+    name: '로그인 페이지',
+    element: <SignIn />,
     withAuth: false,
     redirectPath: '/todo',
   },
+
   {
+    id: 3,
     path: '/signup',
-    element: <SignUpForm />,
+    name: '회원가입 페이지',
+    element: <SignUp />,
     withAuth: false,
     redirectPath: '/todo',
   },
   {
+    id: 4,
     path: '/todo',
+    name: '투두리스트 페이지',
     element: <Todo />,
     withAuth: true,
     redirectPath: '/',
   },
 ];
 
-const router = createBrowserRouter(
+// auth false navigation elements
+export const authFalseNavElements = rootRouterElements.reduce(
+  (prev, router) => {
+    if (!router.withAuth) {
+      return [...prev, { path: router.path, name: router.name }];
+    }
+    return prev;
+  },
+  [],
+);
+
+export const router = createBrowserRouter(
   rootRouterElements.map(page => {
     if ('redirectPath' in page) {
       return {
         path: page.path,
         element: (
-          <AuthLayout withAuth={page.withAuth} redirectPath={page.redirectPath}>
+          <AuthLayout
+            withAuth={page.withAuth}
+            redirectPath={page.redirectPath}
+            navItem={authFalseNavElements}
+          >
             {page.element}
           </AuthLayout>
         ),
@@ -57,7 +77,3 @@ const router = createBrowserRouter(
     };
   }),
 );
-
-export default function Router() {
-  return <RouterProvider router={router} />;
-}
