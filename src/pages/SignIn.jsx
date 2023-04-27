@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import validationEmail from '../../components/validationEmail';
-import validationPassword from '../../components/validationPassword';
-import EmailInput from '../../components/EmailInput';
-import PasswordInput from '../../components/PasswordInput';
-import { UIStyle } from '../../components/globalStyle';
-import postSignIn from '../../apis/postSignIn';
+import validationEmail from '../components/validationEmail';
+import validationPassword from '../components/validationPassword';
+import EmailInput from '../components/EmailInput';
+import PasswordInput from '../components/PasswordInput';
+import { UIStyle } from '../components/globalStyle';
+import postSignIn from '../apis/postSignIn';
 
 function SignIn() {
   const [email, setEmail] = useState('');
