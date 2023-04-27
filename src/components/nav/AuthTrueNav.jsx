@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { removeUserTokenInLocalStorage } from '../../utils/localTokenUtils';
+import { useRouterTo } from '../../hooks/useRouterTo';
 
 function AuthTrueNav({ authTrueNavElements }) {
+  const { routerTo } = useRouterTo();
+
   const logoutHandler = () => {
     removeUserTokenInLocalStorage();
+    routerTo('/');
   };
 
   return (
@@ -15,7 +19,9 @@ function AuthTrueNav({ authTrueNavElements }) {
       </ul>
       <ul>
         {authTrueNavElements.map(element => (
-          <Link to={element.path}>{element.name}</Link>
+          <Link id={element.id} to={element.path}>
+            {element.name}
+          </Link>
         ))}
       </ul>
     </nav>

@@ -5,7 +5,9 @@ function AuthFalseNav({ authFalseNavElements }) {
     <nav>
       <ul>
         {authFalseNavElements.map(element => (
-          <Link to={element.path}>{element.name}</Link>
+          <Link id={element.id} to={element.path}>
+            {element.name}
+          </Link>
         ))}
       </ul>
     </nav>

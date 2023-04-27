@@ -44,7 +44,7 @@ export const rootRouterElements = [
 // auth false navigation elements
 const authFalseNavElements = rootRouterElements.reduce((prev, router) => {
   if (!router.withAuth) {
-    return [...prev, { path: router.path, name: router.name }];
+    return [...prev, { id: router.id, path: router.path, name: router.name }];
   }
   return prev;
 }, []);
@@ -52,7 +52,7 @@ const authFalseNavElements = rootRouterElements.reduce((prev, router) => {
 // auth false navigation elements
 const authTrueNavElements = rootRouterElements.reduce((prev, router) => {
   if (router.withAuth) {
-    return [...prev, { path: router.path, name: router.name }];
+    return [...prev, { id: router.id, path: router.path, name: router.name }];
   }
   return prev;
 }, []);
