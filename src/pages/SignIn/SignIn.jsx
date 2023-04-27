@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authAPI } from '../../api/auth';
 import Input from '../../components/\bcommon/input/Input';
 import { lengthLimit } from '../../constant/passwordRule';
@@ -8,6 +9,7 @@ function SignIn() {
   const [validPassword, setValidPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const validatePassword = event => {
     setPassword(event.target.value);
@@ -28,15 +30,17 @@ function SignIn() {
   };
 
   const register = async () => {
-    const response = await authAPI.post('/auth/signin', {
-      email,
-      password,
-    });
-    // console.log(response);
-    const token = response.data.access_token;
-    window.localStorage.setItem('token', token);
-    window.location.replace('/todo');
-    // .catch((err) => console.log(err));
+    try {
+      const response = await authAPI.post('/auth/signin', {
+        email,
+        password,
+      });
+      const token = response.data.access_token;
+      window.localStorage.setItem('token', token);
+      window.location.replace('/todo');
+    } catch (error) {
+      navigate('/notfound');
+    }
   };
 
   return (
