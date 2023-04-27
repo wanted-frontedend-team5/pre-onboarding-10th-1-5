@@ -3,6 +3,7 @@ import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import ErrorMessage from '../../components/common/ErrorMessage';
 import useInput from '../../hooks/common/useInput';
+import authApi from '../../api/auth';
 
 function SignIn() {
   const [{ email, password }, onChange] = useInput({
@@ -12,13 +13,27 @@ function SignIn() {
 
   const MIN_PASSWORD_LENGTH = '8';
   const checkValid = !(
-    email.includes('@') && password.length >= MIN_PASSWORD_LENGTH
+    email.includes('@') && password.length >= parseInt(MIN_PASSWORD_LENGTH, 10)
   );
+
+  const loginData = {
+    email,
+    password,
+  };
+
+  const login = async () => {
+    const res = await authApi.signIn(loginData);
+    const token = res.data.access_token;
+
+    if (res?.status === 200 && token) {
+      localStorage.setItem('access_token', JSON.stringify(token));
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (checkValid) {
-      // 로그인 실행
+    if (!checkValid) {
+      login();
     }
   };
 
@@ -39,7 +54,7 @@ function SignIn() {
             type="email"
             placeholder="Enter Email"
             required
-            data-testid="email-input"
+            dataTestid="email-input"
           />
           <Input
             onChange={onChange}
@@ -49,7 +64,7 @@ function SignIn() {
             type="Password"
             placeholder="Enter Password"
             required
-            data-testid="password-input"
+            dataTestid="password-input"
           />
           <ErrorMessage>error</ErrorMessage>
           <Button bgcolor="accentColor" txtcolor="txtwhite">
