@@ -4,10 +4,12 @@
 
 `npm install`
 `npm start`
-
+<div>
 Best Practice로 향하는 리팩토링
+  </div>
+  <div>
 Best Practice를 만들기 위해 아래와 같이 기준을 세우고 그에 따라 코드를 리팩토링하였습니다.
-
+</div>
 관심사의 분리
 
 api 파일 분리
