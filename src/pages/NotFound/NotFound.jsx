@@ -1,5 +1,7 @@
-function NotFound() {
-  return <h1>팀장을 맡게되서</h1>;
-}
-
-export default NotFound;
+export default function NotFound() {
+  return (
+    <>
+      <p>Can't not found page</p>
+    </>
+  )
+};
