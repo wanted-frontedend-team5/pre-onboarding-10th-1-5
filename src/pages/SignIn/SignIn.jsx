@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
@@ -6,18 +5,17 @@ import authApi from '../../api/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
+import useInputValidation from '../../hooks/useInputValidation';
 
 function SignIn() {
-  const [email, setEmail] = useState('');
-  const [isEmailSuccess, setIsEmailSuccess] = useState({
-    isSuccess: false,
-    errorMessage: '',
-  });
-  const [password, setPassword] = useState('');
-  const [isPasswordSuccess, setIsPasswordSuccess] = useState({
-    isSuccess: false,
-    errorMessage: '',
-  });
+  const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
+    '',
+    validationEmail,
+  );
+
+  // eslint-disable-next-line operator-linebreak
+  const [password, isPasswordSuccess, handleChangePassword] =
+    useInputValidation('', validationPassword);
 
   const isSuccess = isEmailSuccess.isSuccess && isPasswordSuccess.isSuccess;
   const navigate = useNavigate();
@@ -25,18 +23,6 @@ function SignIn() {
   const pathData = {
     email: '',
     password: '',
-  };
-
-  const handleChangeEmail = e => {
-    const { value } = e.target;
-    setEmail(value);
-    validationEmail(value, setIsEmailSuccess);
-  };
-
-  const handleChangePassword = e => {
-    const { value } = e.target;
-    setPassword(value);
-    validationPassword(value, setIsPasswordSuccess);
   };
 
   const handleClick = async e => {
