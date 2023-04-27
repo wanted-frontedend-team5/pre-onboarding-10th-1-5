@@ -1,89 +1,74 @@
-import axios from "axios";
-import { useState } from "react";
-import { lengthLimit } from "../../constant/passwordRule";
+import { useState } from 'react';
+import { api } from '../../api/auth';
+import Input from '../../components/\bcommon/input/Input';
+import { lengthLimit } from '../../constant/passwordRule';
 
-const host = 'https://www.pre-onboarding-selection-task.shop/';
-const api = axios.create({
-  baseURL: host,
-  Headers: {
-    'Content-Type' : 'application/json',
-  },
-})
- 
-function SignIn(){
-  const [ validEmail, setValidEmail ] = useState(false);
-  const [ validPassword, setValidPassword ] = useState(false);
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+function SignIn() {
+  const [validEmail, setValidEmail] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const validatePassword = (event) => {
+  const validatePassword = event => {
     setPassword(event.target.value);
-    if (event.target.value.length >= lengthLimit){
-      setValidPassword(true)
+    if (event.target.value.length >= lengthLimit) {
+      setValidPassword(true);
     } else {
-      setValidPassword(false)
-    };
+      setValidPassword(false);
+    }
   };
 
-  const validateEmail = (event) => {
+  const validateEmail = event => {
     setEmail(event.target.value);
-    if (event.target.value.includes('@')){
+    if (event.target.value.includes('@')) {
       setValidEmail(true);
     } else {
       setValidEmail(false);
-    };
+    }
   };
-  
+
   const register = async () => {
-    const response = await api.post('/auth/signin',{
-      email, 
+    const response = await api.post('/auth/signin', {
+      email,
       password,
     });
-    console.log(response);
+    // console.log(response);
     const token = response.data.access_token;
     window.localStorage.setItem('token', token);
-    window.location.replace("/todo");
+    window.location.replace('/todo');
     // .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <>
-      <label 
-        htmlFor="email"
-      >
-        이메일
-      </label>
-      <input 
-        id="email" 
-        data-testid="email-input" 
-        placeholder="이메일을 입력해주세요" 
-        type="email" 
-        value={email} 
+      <label htmlFor="email">이메일</label>
+      <Input
+        id="email"
+        data-testid="email-input"
+        placeholder="이메일을 입력해주세요"
+        type="email"
+        value={email}
         onChange={validateEmail}
       />
-      <label 
-        htmlFor="password"
-      >
-        비밀번호
-      </label>
-      <input 
-        id="password" 
-        data-testid="password-input" 
-        placeholder="비밀번호를 입력해주세요" 
-        type="password" 
-        value={password} 
+      <label htmlFor="password">비밀번호</label>
+      <Input
+        id="password"
+        data-testid="password-input"
+        placeholder="비밀번호를 입력해주세요"
+        type="password"
+        value={password}
         onChange={validatePassword}
       />
-      <button 
-        type="submit" 
-        data-testid="signin-button" 
-        disabled={!(validEmail && validPassword)} 
+      <button
+        type="submit"
+        data-testid="signin-button"
+        disabled={!(validEmail && validPassword)}
         onClick={register}
       >
         로그인
       </button>
     </>
-  ) 
-};
+  );
+}
 
 export default SignIn;

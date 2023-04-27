@@ -3,5 +3,5 @@ export default function NotFound() {
     <>
       <p>Can't not found page</p>
     </>
-  )
-};
+  );
+}

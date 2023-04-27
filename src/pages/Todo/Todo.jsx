@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ToDo from '../components/ToDo';
+import TodoItem from '../../components/todo/todoItem';
 
 // API 통신에 필요한 설정 및 변수 선언
 const token = localStorage.getItem('token');
@@ -70,7 +70,7 @@ function ToDoList() {
       </form>
       <ul>
         {toDos.map(todo => (
-          <ToDo
+          <TodoItem
             key={todo.id}
             todo={todo}
             deleteToDo={deleteToDo}
