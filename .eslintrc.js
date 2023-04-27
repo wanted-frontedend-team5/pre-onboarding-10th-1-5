@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    // labelAttributes: 0,
     // for enabling the rule. 0=off, 1=warn, 2=error. Defaults to 0.
     'linebreak-style': 0,
     'import/prefer-default-export': 0,
@@ -39,7 +40,8 @@ module.exports = {
     //  switch 문에서 default case를 사용하지 않을 때 경고를 끔으로써 default case가 필수적이지 않을 때 규칙을 비활성화합니다.
     'default-case': 2,
     'consistent-return': 0,
-    'no-param-reassign': 2,
+    // 매개변수의 재할당
+    'no-param-reassign': 0,
     'jsx-a11y/label-has-associated-control': 1,
     // 'react/require-default-props': 0,
     //  <abc />

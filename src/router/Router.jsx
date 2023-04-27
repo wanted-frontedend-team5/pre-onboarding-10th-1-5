@@ -13,12 +13,12 @@ import NotFound from '../pages/NotFound/NotFound';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/signin" />,
+    element: <Navigate to="/signup" />,
     errorElement: <NotFound />,
   },
-  { index: true, path: '/', element: <Navigate to="/signin" /> },
-  { path: '/signin', element: <SignIn /> },
+  { index: true, path: '/', element: <Navigate to="/signup" /> },
   { path: '/signup', element: <SignUp /> },
+  { path: '/signin', element: <SignIn /> },
   {
     path: '/todo',
     element: (
