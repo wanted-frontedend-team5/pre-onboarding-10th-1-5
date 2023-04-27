@@ -1,9 +1,16 @@
-import React from 'react';
+import TodoItem from './TodoItem';
 
-export default function TodoList() {
+export default function TodoList({ todos, isLoading, getTodos }) {
+  if (isLoading) <p>Loading...</p>;
   return (
     <ul>
-      <li>ss</li>
+      {todos.length !== 0 ? (
+        todos.map(todo => (
+          <TodoItem key={todo.id} todoData={todo} getTodos={getTodos} />
+        ))
+      ) : (
+        <p>Todo를 작성해보세요!</p>
+      )}
     </ul>
   );
 }
