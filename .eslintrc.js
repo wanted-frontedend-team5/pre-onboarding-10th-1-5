@@ -7,6 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/recommended',
     'airbnb',
+    'airbnb/hooks',
     'plugin:prettier/recommended',
   ],
   overrides: [],
