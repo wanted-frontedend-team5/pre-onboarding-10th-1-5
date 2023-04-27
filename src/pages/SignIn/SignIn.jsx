@@ -5,7 +5,8 @@ import validationEmail from '../../components/validationEmail';
 import validationPassword from '../../components/validationPassword';
 import EmailInput from '../../components/EmailInput';
 import PasswordInput from '../../components/PasswordInput';
-import { buttonStyle } from '../../components/globalStyle';
+import { UIStyle } from '../../components/globalStyle';
+import postSignIn from '../../apis/postSignIn';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -61,7 +62,7 @@ function SignIn() {
   return (
     <div className=" w-full">
       <h1 className="text-3xl">Sign In</h1>
-      <form className=" space-y-1">
+      <form className="space-y-1">
         <EmailInput
           id="signup__email-input"
           value={email}
@@ -75,7 +76,7 @@ function SignIn() {
           errorMessage={isPasswordSuccess.errorMessage}
         />
         <button
-          className={buttonStyle}
+          className={UIStyle.buttonStyle}
           onClick={handleClick}
           type="submit"
           data-testid="signin-button"
