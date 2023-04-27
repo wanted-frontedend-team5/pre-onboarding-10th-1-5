@@ -8,6 +8,7 @@ export default function Input({
   placeholder,
   required,
   value,
+  dataTestid,
 }) {
   return (
     <>
@@ -22,6 +23,7 @@ export default function Input({
         placeholder={placeholder}
         required={required}
         value={value}
+        data-testid={dataTestid}
       />
     </>
   );
