@@ -5,13 +5,13 @@ import validationPassword from '../../utils/validationPassword';
 import Input from '../../components/Input';
 import globalStyle from '../../utils/globalStyle';
 import postSignUp from '../../apis/postSignUp';
+import useInputValidation from '../../hooks/useInputValidation';
 
 function SignUp() {
-  const [email, setEmail] = useState('');
-  const [isEmailSuccess, setIsEmailSuccess] = useState({
-    isSuccess: false,
-    errorMessage: '',
-  });
+  const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
+    '',
+    validationEmail,
+  );
 
   const [password, setPassword] = useState('');
   const [isPasswordSuccess, setIsPasswordSuccess] = useState({
@@ -25,12 +25,6 @@ function SignUp() {
   const pathData = {
     email: '',
     password: '',
-  };
-
-  const handleChangeEmail = e => {
-    const { value } = e.target;
-    setEmail(value);
-    validationEmail(value, setIsEmailSuccess);
   };
 
   const handleChangePassword = e => {

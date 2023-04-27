@@ -2,6 +2,7 @@ import globalStyle from '../utils/globalStyle';
 
 function Input({
   dataTestid,
+  type,
   label,
   errorMessage,
   id,
@@ -17,7 +18,7 @@ function Input({
         data-testid={dataTestid}
         placeholder="Password"
         onChange={onChange}
-        type="password"
+        type={type}
         id={id}
         value={value}
         className={`${globalStyle.inputStyle}${
