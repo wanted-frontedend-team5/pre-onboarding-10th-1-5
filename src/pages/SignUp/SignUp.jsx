@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import Input from "../../components/\bcommon/input/Input";
 import { lengthLimit } from "../../constant/passwordRule";
 
 const host = 'https://www.pre-onboarding-selection-task.shop/';
@@ -52,7 +53,7 @@ function SignUp (){
       >
         이메일
       </label>
-      <input 
+      <Input 
         id="email" 
         data-testid="email-input" 
         placeholder="이메일을 입력해주세요" 
@@ -65,7 +66,7 @@ function SignUp (){
       >
         비밀번호
       </label>
-      <input 
+      <Input 
         id="password" 
         data-testid="password-input" 
         placeholder="비밀번호를 입력해주세요" 
