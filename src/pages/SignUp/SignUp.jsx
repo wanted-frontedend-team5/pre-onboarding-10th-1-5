@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-
-import validationEmail from '../utils/validationEmail';
-import validationPassword from '../utils/validationPassword';
-import postSignUp from '../apis/postSignUp';
-import EmailInput from '../components/EmailInput';
-import PasswordInput from '../components/PasswordInput';
-import { buttonStyle } from '../utils/globalStyle';
+import validationEmail from '../../utils/validationEmail';
+import validationPassword from '../../utils/validationPassword';
+import Input from '../../components/Input';
+import globalStyle from '../../utils/globalStyle';
+import postSignUp from '../../apis/postSignUp';
 
 function SignUp() {
   const [email, setEmail] = useState('');
@@ -57,20 +55,24 @@ function SignUp() {
     <div className="w-full">
       <h1 className="text-3xl">Sign Up</h1>
       <form className="space-y-1">
-        <EmailInput
+        <Input
+          label="Email"
+          dataTestid="email-input"
           id="signup__email-input"
           value={email}
           onChange={handleChangeEmail}
           errorMessage={isEmailSuccess.errorMessage}
         />
-        <PasswordInput
+        <Input
+          label="Password"
+          dataTestid="password-input"
           id="signup__password-input"
           value={password}
           onChange={handleChangePassword}
           errorMessage={isPasswordSuccess.errorMessage}
         />
         <button
-          className={buttonStyle}
+          className={globalStyle.buttonStyle}
           onClick={handleClick}
           type="submit"
           data-testid="signup-button"
