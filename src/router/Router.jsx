@@ -16,13 +16,12 @@ const router = createBrowserRouter([
     element: <Navigate to="/signin" />,
     errorElement: <NotFound />,
   },
-  { index: true, path: '/', element: <Navigate to="/signin" /> },
   { path: '/signin', element: <SignIn /> },
   { path: '/signup', element: <SignUp /> },
   {
     path: '/todo',
     element: (
-      <ProtectedRoute require>
+      <ProtectedRoute>
         <Todo />
       </ProtectedRoute>
     ),
