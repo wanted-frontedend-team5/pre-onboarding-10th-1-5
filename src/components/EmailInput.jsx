@@ -1,4 +1,4 @@
-import { UIStyle } from './globalStyle';
+import globalStyle from '../utils/globalStyle';
 
 function EmailInput({
   errorMessage,
@@ -14,13 +14,12 @@ function EmailInput({
       Email
       <input
         data-testid="email-input"
-        // state={state}
         placeholder="Email"
         onChange={onChange}
         type="email"
         id={id}
         value={value}
-        className={`${UIStyle.inputStyle} ${
+        className={`${globalStyle.inputStyle} ${
           disabled ? 'bg-gray-100' : 'bg-white'
         } ${className}`}
       />

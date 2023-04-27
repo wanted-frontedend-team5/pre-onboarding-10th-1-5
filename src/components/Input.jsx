@@ -1,6 +1,8 @@
-import { UIStyle } from './globalStyle';
+import globalStyle from '../utils/globalStyle';
 
-function PasswordInput({
+function Input({
+  dataTestid,
+  label,
   errorMessage,
   id,
   onChange,
@@ -10,15 +12,15 @@ function PasswordInput({
 }) {
   return (
     <label htmlFor={id} className="flex flex-col">
-      Password
+      {label}
       <input
-        data-testid="password-input"
+        data-testid={dataTestid}
         placeholder="Password"
         onChange={onChange}
         type="password"
         id={id}
         value={value}
-        className={`${UIStyle.inputStyle}${
+        className={`${globalStyle.inputStyle}${
           disabled ? 'bg-gray-100' : 'bg-white'
         } ${className}`}
       />
@@ -27,4 +29,4 @@ function PasswordInput({
   );
 }
 
-export default PasswordInput;
+export default Input;
