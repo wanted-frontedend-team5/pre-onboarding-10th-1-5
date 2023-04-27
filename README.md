@@ -10,7 +10,7 @@ Best Practice로 향하는 리팩토링
   <div>
 Best Practice를 만들기 위해 아래와 같이 기준을 세우고 그에 따라 코드를 리팩토링하였습니다.
 </div>
-관심사의 분리
+
 
 api 파일 분리
 기존 Signup, Signin 컴포넌트 안에 있던 RestAPI 관련 요소들을 별도 파일로 분리하였습니다.
