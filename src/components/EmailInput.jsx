@@ -1,4 +1,4 @@
-import { inputStyle } from './globalStyle';
+import { UIStyle } from './globalStyle';
 
 function EmailInput({
   errorMessage,
@@ -20,7 +20,7 @@ function EmailInput({
         type="email"
         id={id}
         value={value}
-        className={`${inputStyle} ${
+        className={`${UIStyle.inputStyle} ${
           disabled ? 'bg-gray-100' : 'bg-white'
         } ${className}`}
       />
