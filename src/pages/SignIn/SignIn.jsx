@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import ErrorMessage from '../../components/common/ErrorMessage';
@@ -14,6 +14,13 @@ function SignIn() {
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      navigate('/todo');
+    }
+  }, [navigate]);
 
   const MIN_PASSWORD_LENGTH = '8';
   const checkValid = !(
