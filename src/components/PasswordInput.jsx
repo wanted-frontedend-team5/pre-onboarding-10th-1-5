@@ -1,6 +1,6 @@
 import { inputStyle } from './globalStyle';
 
-function EmailInput({
+function PasswordInput({
   errorMessage,
   state,
   id,
@@ -11,16 +11,16 @@ function EmailInput({
 }) {
   return (
     <label htmlFor={id} className="flex flex-col">
-      Email
+      Password
       <input
-        data-testid="email-input"
+        data-testid="password-input"
         // state={state}
-        placeholder="Email"
+        placeholder="Password"
         onChange={onChange}
-        type="email"
+        type="password"
         id={id}
         value={value}
-        className={`${inputStyle} ${
+        className={`${inputStyle}${
           disabled ? 'bg-gray-100' : 'bg-white'
         } ${className}`}
       />
@@ -29,4 +29,4 @@ function EmailInput({
   );
 }
 
-export default EmailInput;
+export default PasswordInput;
