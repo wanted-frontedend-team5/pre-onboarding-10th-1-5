@@ -1,5 +1,26 @@
+import { useEffect, useState, useCallback } from 'react';
+import todoApi from '../../api/todo';
+import TodoList from '../../components/todo/TodoList';
+
 function Todo() {
-  return <h1>이것들은 내가 할 일이지...</h1>;
+  const [todoList, setTodoList] = useState([]);
+
+  const fetchTodoRequest = useCallback(async () => {
+    const res = await todoApi.fetchList();
+    setTodoList(res);
+  }, []);
+
+  useEffect(() => {
+    fetchTodoRequest();
+  }, [fetchTodoRequest]);
+
+  return (
+    <>
+      <h1>투두리스트 페이지 입니다.</h1>
+      <hr />
+      <TodoList todoList={todoList} fetchTodoRequest={fetchTodoRequest} />
+    </>
+  );
 }
 
 export default Todo;

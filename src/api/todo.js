@@ -13,7 +13,7 @@ const todoApi = {
     }
   },
 
-  create: async todoInfo => {
+  createTodo: async todoInfo => {
     try {
       const response = await axiosAuthInstance.post('/todos', todoInfo);
       return response.data;
