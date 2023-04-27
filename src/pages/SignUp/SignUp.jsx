@@ -58,6 +58,7 @@ function SignUp() {
           onChange={handleChangePassword}
           errorMessage={isPasswordSuccess.errorMessage}
         />
+        <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <Button
           onClick={handleClick}
           data-testid="signup-button"

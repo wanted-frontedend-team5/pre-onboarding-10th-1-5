@@ -5,6 +5,7 @@ import validationPassword from '../../utils/validationPassword';
 import authApi from '../../api/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import ErrorMessage from '../../components/ErrorMessage';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -62,8 +63,8 @@ function SignIn() {
           id="signup__email-input"
           value={email}
           onChange={handleChangeEmail}
-          errorMessage={isEmailSuccess.errorMessage}
         />
+        <ErrorMessage errorMessage={isEmailSuccess.errorMessage} />
         <Input
           type="password"
           label="Password"
@@ -71,8 +72,8 @@ function SignIn() {
           id="signup__password-input"
           value={password}
           onChange={handleChangePassword}
-          errorMessage={isPasswordSuccess.errorMessage}
         />
+        <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <Button
           onClick={handleClick}
           data-testid="signin-button"
