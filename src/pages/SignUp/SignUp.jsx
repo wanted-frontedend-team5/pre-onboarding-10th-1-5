@@ -64,12 +64,7 @@ function SignUp() {
             value={input.password}
           />
         </div>
-        <button
-          data-testid="signup-button"
-          type="submit"
-          disabled={disable}
-          color="accentColor"
-        >
+        <button data-testid="signup-button" type="submit" disabled={disable}>
           회원가입
         </button>
       </form>
