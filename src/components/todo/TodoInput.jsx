@@ -1,6 +1,5 @@
 import { AiOutlinePlus } from 'react-icons/ai';
 import useInput from '../../hooks/useInput';
-import Input from '../Input';
 import Button from '../Button';
 import todoApi from '../../api/todo';
 
@@ -21,7 +20,7 @@ export default function TodoInput({ getTodos }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-row">
-      <Input
+      <input
         onChange={onChange}
         type="text"
         data-testid="new-todo-input"
@@ -29,7 +28,7 @@ export default function TodoInput({ getTodos }) {
         value={todo}
         name="todo"
       />
-      <Button data-testid="new-todo-add-button">
+      <Button data-testid="new-todo-add-button" isSuccess>
         <AiOutlinePlus />
       </Button>
     </form>
