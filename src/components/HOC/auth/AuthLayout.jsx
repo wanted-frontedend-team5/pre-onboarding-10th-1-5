@@ -2,11 +2,13 @@ import { useEffect } from 'react';
 import { useRouterTo } from '../../../hooks/useRouterTo';
 import { getUserTokenInLocalStorage } from '../../../utils/localTokenUtils';
 import AuthFalseNav from '../../nav/AuthFalseNav';
+import AuthTrueNav from '../../nav/AuthTrueNav';
 
 export default function AuthLayout({
   children,
   withAuth,
-  navItem,
+  authFalseNavElements,
+  authTrueNavElements,
   redirectPath = '/',
 }) {
   const { routerTo } = useRouterTo();
@@ -17,12 +19,19 @@ export default function AuthLayout({
     if (!withAuth && authToken) routerTo(redirectPath, true);
   }, []);
 
-  if (withAuth) return children;
+  if (withAuth) {
+    return (
+      <>
+        <AuthTrueNav authTrueNavElements={authTrueNavElements} />
+        {children}
+      </>
+    );
+  }
 
   if (!withAuth) {
     return (
       <>
-        <AuthFalseNav authFalseNavElements={navItem} />
+        <AuthFalseNav authFalseNavElements={authFalseNavElements} />
         {children}
       </>
     );

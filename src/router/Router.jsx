@@ -42,15 +42,20 @@ export const rootRouterElements = [
 ];
 
 // auth false navigation elements
-export const authFalseNavElements = rootRouterElements.reduce(
-  (prev, router) => {
-    if (!router.withAuth) {
-      return [...prev, { path: router.path, name: router.name }];
-    }
-    return prev;
-  },
-  [],
-);
+const authFalseNavElements = rootRouterElements.reduce((prev, router) => {
+  if (!router.withAuth) {
+    return [...prev, { path: router.path, name: router.name }];
+  }
+  return prev;
+}, []);
+
+// auth false navigation elements
+const authTrueNavElements = rootRouterElements.reduce((prev, router) => {
+  if (router.withAuth) {
+    return [...prev, { path: router.path, name: router.name }];
+  }
+  return prev;
+}, []);
 
 export const router = createBrowserRouter(
   rootRouterElements.map(page => {
@@ -61,7 +66,8 @@ export const router = createBrowserRouter(
           <AuthLayout
             withAuth={page.withAuth}
             redirectPath={page.redirectPath}
-            navItem={authFalseNavElements}
+            authFalseNavElements={authFalseNavElements}
+            authTrueNavElements={authTrueNavElements}
           >
             {page.element}
           </AuthLayout>
