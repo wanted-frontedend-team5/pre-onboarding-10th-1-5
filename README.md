@@ -95,36 +95,27 @@ npm start
 - docs: Everything related to documentation
 - chore: Regular code maintenance.
 
-### 절대 경로 설정
+## [경로설정] Best Practice 요소
 
 - src 폴더를 절대 경로로 설정해서 간결한 import 경로 설정 가능
 
-### Router
 
-- 파일을 모듈화 해서 관리
-- router 객체 내부에서 토큰을 검사하는 component 사용
-
-### API
+## [Api] Best Practice 요소
 
 **api 사용에 필요한 파일들을 api 폴더에 별도로 분리**
+**axiosInstance.js**
+- api를 활용하는 함수를 사용하기 위한 전처리 과정.
+- 공통적으로 요청 시 사용하는 헤더부분을 axios.create으로 지정.
+- axios의 interceptors 메서드를 통해 access_token이 필요한 경우의 api 설정을 처리.
 
-auth.js
+## [auth] Best Practice 요소
 
 - 인증인가에 필요한 api 요청 함수들을 정리.
 - 함수들을 객체로 담은 authApi를 default로 export.
 - 추후 확장가능성을 고려한 구조.
 
-axiosInstance.js
 
-- api를 활용하는 함수를 사용하기 위한 전처리 과정.
-- 공통적으로 요청 시 사용하는 헤더부분을 axios.create으로 지정.
-- axios의 interceptors 메서드를 통해 access_token이 필요한 경우의 api 설정을 처리.
-
-constant/config.js
-
-- axios의 baseURL이 되는 주소는 상수로서, constant 폴더 내 BASE_URL로 별도 분리 보관.
-
-### 유틸리티 함수 활용
+## [유틸리티 ] Best Practice 요소
 
 검증 : 정규식 vs ~~String 내장함수~~
 
