@@ -1,10 +1,9 @@
-import globalStyle from '../utils/globalStyle';
+import globalStyle from '../../utils/globalStyle';
 
-function Button({ dataTestid, onClick, isSuccess, children }) {
+function SubmitButton({ dataTestid, children, isSuccess = true }) {
   return (
     <button
       className={globalStyle.buttonStyle}
-      onClick={onClick}
       type="submit"
       data-testid={dataTestid}
       disabled={isSuccess ? null : 'disabled'}
@@ -14,4 +13,4 @@ function Button({ dataTestid, onClick, isSuccess, children }) {
   );
 }
 
-export default Button;
+export default SubmitButton;

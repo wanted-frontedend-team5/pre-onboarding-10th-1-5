@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import validationEmail from '../../utils/validationEmail';
-import validationPassword from '../../utils/validationPassword';
-import authApi from '../../api/auth';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import ErrorMessage from '../../components/ErrorMessage';
-import useInputValidation from '../../hooks/useInputValidation';
-import { putUserTokenInLocalStorage } from '../../utils/localTokenUtils';
+import validationEmail from 'utils/validationEmail';
+import validationPassword from 'utils/validationPassword';
+import authApi from 'api/auth';
+import Input from 'components/input/Input';
+import SubmitButton from 'components/SubmitButton';
+import ErrorMessage from 'components/ErrorMessage';
+import useInputValidation from 'hooks/useInputValidation';
+import { putUserTokenInLocalStorage } from 'utils/localTokenUtils';
 
 function SignIn() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -26,7 +26,7 @@ function SignIn() {
     password: '',
   };
 
-  const handleClick = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     pathData.email = email;
     pathData.password = password;
@@ -45,7 +45,7 @@ function SignIn() {
   return (
     <div className=" w-full">
       <h1 className="text-3xl">Sign In</h1>
-      <form className=" space-y-1">
+      <form className=" space-y-1" onSubmit={handleSubmit}>
         <Input
           type="email"
           label="Email"
@@ -65,13 +65,9 @@ function SignIn() {
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <ErrorMessage errorMessage={errorMessage} />
-        <Button
-          onClick={handleClick}
-          data-testid="signin-button"
-          isSuccess={isSuccess}
-        >
+        <SubmitButton data-testid="signin-button" isSuccess={isSuccess}>
           Sign In
-        </Button>
+        </SubmitButton>
       </form>
     </div>
   );

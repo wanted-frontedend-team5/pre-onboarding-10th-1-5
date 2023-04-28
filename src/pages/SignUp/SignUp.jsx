@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router';
-import validationEmail from '../../utils/validationEmail';
-import validationPassword from '../../utils/validationPassword';
-import Input from '../../components/Input';
-import authApi from '../../api/auth';
-import useInputValidation from '../../hooks/useInputValidation';
-import Button from '../../components/Button';
-import ErrorMessage from '../../components/ErrorMessage';
+import validationEmail from 'utils/validationEmail';
+import validationPassword from 'utils/validationPassword';
+import Input from 'components/input/Input';
+import authApi from 'api/auth';
+import useInputValidation from 'hooks/useInputValidation';
+import SubmitButton from 'components/Button';
+import ErrorMessage from 'components/ErrorMessage';
 
 function SignUp() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -24,7 +24,7 @@ function SignUp() {
     password: '',
   };
 
-  const handleClick = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     pathData.email = email;
     pathData.password = password;
@@ -39,7 +39,7 @@ function SignUp() {
   return (
     <div className="w-full">
       <h1 className="text-3xl">Sign Up</h1>
-      <form className="space-y-1">
+      <form className="space-y-1" onSubmit={handleSubmit}>
         <Input
           type="email"
           label="Email"
@@ -59,13 +59,9 @@ function SignUp() {
           errorMessage={isPasswordSuccess.errorMessage}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
-        <Button
-          onClick={handleClick}
-          data-testid="signup-button"
-          isSuccess={isSuccess}
-        >
+        <SubmitButton data-testid="signup-button" isSuccess={isSuccess}>
           Sign Up
-        </Button>
+        </SubmitButton>
       </form>
     </div>
   );
