@@ -1,18 +1,14 @@
 import { useState } from 'react';
+import toDoApi from '../../api/toDo';
 import Button from '../Button';
 import Input from '../Input';
-import { axiosAuthInstance } from './axiosInstance';
 
 export default function ToDoUnit({ todo, deleteToDo, setCheck, getToDos }) {
   const [editMode, setEditMode] = useState(false);
   const [newToDo, setNewToDo] = useState(todo.todo);
 
   const editToDo = async () => {
-    await axiosAuthInstance.put(`./todos/${todo.id}`, {
-      todo: newToDo,
-      isCompleted: todo.isCompleted,
-    });
-    // console.log(response);
+    toDoApi.updateTodo(todo.id, newToDo, todo.isCompleted);
     getToDos();
     setEditMode(false);
   };

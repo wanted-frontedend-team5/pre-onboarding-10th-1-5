@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import ToDoUnit from '../../components/todo/todounit';
-import { axiosAuthInstance } from './axiosInstance';
+import toDoApi from '../../api/toDo';
+import ToDoUnit from '../../components/todo/ToDoUnit';
 
 function Todo() {
   const token = localStorage.getItem('token');
@@ -12,9 +10,8 @@ function Todo() {
 
   // 서버에서 todo data를 받아와 toDos에 갱신
   const getToDos = async () => {
-    const response = await axiosAuthInstance.get('./todos');
+    const response = toDoApi.getTodos();
     setToDos(response.data);
-    // console.log(response);
   };
   // 새로 입력받은 todo를 서버에 post, 화면의 toDos 갱신
   const addToDo = async () => {
@@ -22,24 +19,18 @@ function Todo() {
       todo: inputValue,
       isCompleted: false,
     };
-    await axiosAuthInstance.post('./todos', createNewToDo);
+    toDoApi.createTodo(createNewToDo);
     getToDos();
-    // console.log(response);
   };
-
   // todo 삭제
   const deleteToDo = async todo => {
-    await axiosAuthInstance.delete(`./todos/${todo.id}`);
-    // console.log(response);
+    toDoApi.deleteTodo(todo.id);
     getToDos();
   };
 
   // 체크박스 변경
   const setCheck = async todo => {
-    await axiosAuthInstance.put(`./todos/${todo.id}`, {
-      todo: todo.todo,
-      isCompleted: !todo.isCompleted,
-    });
+    toDoApi.updateTodo(todo.id, todo.todo, !todo.isCompleted);
     getToDos();
   };
 
@@ -51,16 +42,15 @@ function Todo() {
   return (
     <>
       <form onSubmit={addToDo}>
-        <Input
+        <input
           data-testid="new-todo-input"
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
         />
-        <Button data-testid="new-todo-add-button" type="submit">
+        <button data-testid="new-todo-add-button" type="submit">
           추가
-        </Button>
+        </button>
       </form>
-
       <ul>
         {toDos.map(todo => (
           <ToDoUnit
