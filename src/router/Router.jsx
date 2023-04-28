@@ -12,8 +12,6 @@ import Todo from 'pages/Todo/Todo';
 import NotFound from 'pages/NotFound/NotFound';
 import { getUserTokenInLocalStorage } from 'utils/localTokenUtils';
 
-const token = getUserTokenInLocalStorage();
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -24,7 +22,7 @@ const router = createBrowserRouter([
     path: '/signin',
     element: <SignIn />,
     loader: () => {
-      if (token) {
+      if (getUserTokenInLocalStorage()) {
         throw redirect('/todo');
       }
       return null;
@@ -34,7 +32,7 @@ const router = createBrowserRouter([
     path: '/signup',
     element: <SignUp />,
     loader: () => {
-      if (token) {
+      if (getUserTokenInLocalStorage()) {
         throw redirect('/todo');
       }
       return null;

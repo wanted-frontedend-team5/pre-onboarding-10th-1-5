@@ -60,8 +60,6 @@ pw : 12345678
 - 개발 전 기능별 bestpractice 공통 기준을 세운 후에 팀원 개개인이 구현하고, 구체화 시켰습니다.
 - 기능 구현 후 브랜치에 Pull Request를 날린 후, 코드 리뷰를 통해 최고의 bestpractice를 채택했습니다.
 - 서로의 코드를 리뷰하고 그 중에서 Best Practice를 결정한 다음 보완할 점을 의논하고, 리팩토링을 진행했습니다.
-    
-    
 
 ## 🎳 기능 구현 목록
 
@@ -79,17 +77,17 @@ pw : 12345678
 ### Best Practice 정의
 
 1. 가독성 좋은 코드 & 문서
-    - 너무 길지 않고 뜻이 명확한 변수/함수명
-    - 띄어쓰기가 규칙에 맞게 잘 짜여진 통일성 있는 코드
-    - 관심사의 분리가 잘 이뤄진 코드
-    - 커밋 메시지만으로 버전의 변화를 파악할 수 있는 히스토리
-2. 성능이 좋은 코드 
-    - 컴포넌트 재사용을 통한 성능 개선
-    - 유틸 함수 사용을 통한 반복 코드 제거
-3. 확장 가능성이 있는 코드 
-    - 추후에 유지보수하기 용이한 코드
-4. 사용자 관점에서 사용성이 좋은 코드 
-    - 에러메시지 안내
+   - 너무 길지 않고 뜻이 명확한 변수/함수명
+   - 띄어쓰기가 규칙에 맞게 잘 짜여진 통일성 있는 코드
+   - 관심사의 분리가 잘 이뤄진 코드
+   - 커밋 메시지만으로 버전의 변화를 파악할 수 있는 히스토리
+2. 성능이 좋은 코드
+   - 컴포넌트 재사용을 통한 성능 개선
+   - 유틸 함수 사용을 통한 반복 코드 제거
+3. 확장 가능성이 있는 코드
+   - 추후에 유지보수하기 용이한 코드
+4. 사용자 관점에서 사용성이 좋은 코드
+   - 에러메시지 안내
 
 ## 1. 가독성 좋은 코드 & 문서
 
@@ -98,29 +96,25 @@ pw : 12345678
 ### 코딩 컨벤션
 
 > formatter와 linter 설정을 통해 통일성 있는 코드를 작성
-> 
+
 - Eslint
-    - airbnb 규칙을 사용하였으며, 회의를 통해서 규칙을 수정
+  - airbnb 규칙을 사용하였으며, 회의를 통해서 규칙을 수정
 - Prettier
-    - 팀에서 결정한 코드 포맷 옵션으로 저장 시 자동으로 포맷
- - Husky
-    - 커밋 전에는 포맷을, 푸쉬 전에는 린팅을 강제하는 설정
-    
-    ```bash
-    #pre-commit
-    npx lint-staged
-    ```
-    
-    ```bash
-    #pre-commit
-    npm run lint
-    ```
-    
+  - 팀에서 결정한 코드 포맷 옵션으로 저장 시 자동으로 포맷
+- Husky
+  - 커밋 전에는 포맷을, 푸쉬 전에는 린팅을 강제하는 설정
+  ```bash
+  #pre-commit
+  npx lint-staged
+  ```
+  ```bash
+  #pre-commit
+  npm run lint
+  ```
 
 ### 커밋 컨벤션
 
 > 다음과 같은 기준에 따라 말머리를 붙이고, oneline commit message를 작성하는 것을 컨벤션으로 정함.
-> 
 
 ```tsx
 - feat: The new feature you're adding to a particular application
@@ -217,7 +211,7 @@ className={`${globalStyle.inputStyle}${		disabled ? 'bg-gray-100' : 'bg-white' }
 - 인증이 필요한 `todo` 페이지는 `ProtectedRoute` 를 레이아웃 패턴을 이용해서 인증 처리
 
 ```jsx
- const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Navigate to="/signin" />,
@@ -227,7 +221,7 @@ className={`${globalStyle.inputStyle}${		disabled ? 'bg-gray-100' : 'bg-white' }
     path: '/signin',
     element: <SignIn />,
     loader: () => {
-      if (token) {
+      if (getUserTokenInLocalStorage()) {
         throw redirect('/todo');
       }
       return null;
@@ -237,7 +231,7 @@ className={`${globalStyle.inputStyle}${		disabled ? 'bg-gray-100' : 'bg-white' }
     path: '/signup',
     element: <SignUp />,
     loader: () => {
-      if (token) {
+      if (getUserTokenInLocalStorage()) {
         throw redirect('/todo');
       }
       return null;
@@ -252,6 +246,10 @@ className={`${globalStyle.inputStyle}${		disabled ? 'bg-gray-100' : 'bg-white' }
     ),
   },
 ]);
+
+export default function Router() {
+  return <RouterProvider router={router} />;
+}
 ```
 
 ### Input 컴포넌트와 Button 컴포넌트
@@ -288,7 +286,7 @@ export default Input;
 
 `DefaultButton.js`
 
-```
+```jsx
 function DefaultButton({ children, onClick, dataTestid = '' }) {
   return (
     <button
@@ -301,13 +299,11 @@ function DefaultButton({ children, onClick, dataTestid = '' }) {
     </button>
   );
 }
-
 ```
 
 `SubmitButton.js`
 
 ```jsx
-
 function SubmitButton({ dataTestid, children, isSuccess = true }) {
   return (
     <button
@@ -332,13 +328,13 @@ export default SubmitButton;
 
 ```jsx
 const onChange = useCallback(e => {
-    const { name, value } = e.target;
-    setForm(form => ({ ...form, [name]: value }));
-  }, []);
+  const { name, value } = e.target;
+  setForm(form => ({ ...form, [name]: value }));
+}, []);
 
-  const setValue = useCallback((name, value) => {
-    setForm(form => ({ ...form, [name]: value }));
-  }, []);
+const setValue = useCallback((name, value) => {
+  setForm(form => ({ ...form, [name]: value }));
+}, []);
 ```
 
 `useInputValidation.js`
@@ -353,7 +349,7 @@ const useInputValidation = (initialValue, validationFunction) => {
     errorMessage: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const inputValue = e.target.value;
     setValue(inputValue);
     validationFunction(inputValue, setValidation);
@@ -370,9 +366,13 @@ const useInputValidation = (initialValue, validationFunction) => {
 ```jsx
 // ...
 
-	function SignUp() {
-	  const [email, isEmailSuccess, handleChangeEmail] = useInputValidation('', validationEmail);
-	  const [password, isPasswordSuccess, handleChangePassword] = useInputValidation('', validationPassword);
+function SignUp() {
+  const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
+    '',
+    validationEmail,
+  );
+  const [password, isPasswordSuccess, handleChangePassword] =
+    useInputValidation('', validationPassword);
 
   // ...
 }
