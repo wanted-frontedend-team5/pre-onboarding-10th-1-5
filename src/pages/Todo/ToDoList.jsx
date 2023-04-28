@@ -1,35 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import getToDoList from '../apis/getToDoList';
-import ToDoForm from '../components/ToDoForm';
-import ToDo from '../components/ToDo';
+
+import todoApi from '../../api/todo';
+import ToDoForm from '../../components/ToDoForm';
+import ToDo from '../../components/ToDo';
 
 function ToDoList() {
   const [toDos, setToDos] = useState([]);
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem('access_token');
 
+  console.log(toDos);
   useEffect(() => {
     const patchToDoList = async () => {
-      try {
-        const response = await getToDoList(accessToken);
-        setToDos(response);
-      } catch (error) {
-        console.error(error);
-      }
+      const response = await todoApi.getTodos();
+      setToDos(response);
     };
 
-    if (!accessToken) {
-      navigate('/signin');
-    }
-
     patchToDoList();
-  }, [accessToken, navigate]);
+  }, [navigate]);
 
   return (
     <div className="space-y-1 w-full">
       <h1 className="text-3xl">ToDo List</h1>
-      <ToDoForm toDos={toDos} setToDos={setToDos} accessToken={accessToken} />
+      <ToDoForm toDos={toDos} setToDos={setToDos} />
       <ul className="flex flex-col">
         {toDos.map(todo => (
           <ToDo
@@ -39,7 +32,6 @@ function ToDoList() {
             isCompleted={todo.isCompleted}
             toDos={toDos}
             setToDos={setToDos}
-            accessToken={accessToken}
           />
         ))}
       </ul>

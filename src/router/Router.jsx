@@ -7,8 +7,8 @@ import {
 import SignIn from '../pages/SignIn/SignIn';
 import SignUp from '../pages/SignUp/SignUp';
 import ProtectedRoute from '../components/HOC/auth/ProtectedRoute';
-import Todo from '../pages/Todo/Todo';
 import NotFound from '../pages/NotFound/NotFound';
+import ToDoList from '../pages/Todo/ToDoList';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     path: '/todo',
     element: (
       <ProtectedRoute>
-        <Todo />
+        <ToDoList />
       </ProtectedRoute>
     ),
   },

@@ -1,10 +1,10 @@
 import { AxiosError } from 'axios';
-import { axiosAuthInstance } from './client';
+import { axiosAuthInstance } from './axiosInstance';
 
 const createTodo = async pathData => {
   try {
     const res = await axiosAuthInstance.post('/todos', pathData);
-    return res;
+    return res.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       return error.response;
@@ -16,7 +16,7 @@ const createTodo = async pathData => {
 const getTodos = async () => {
   try {
     const res = await axiosAuthInstance.get('/todos');
-    return res;
+    return res.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       return error.response;
@@ -28,7 +28,7 @@ const getTodos = async () => {
 const deleteTodo = async TodoId => {
   try {
     const res = await axiosAuthInstance.delete(`/todos/${TodoId}`);
-    return res;
+    return res.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       return error.response;
@@ -40,7 +40,7 @@ const deleteTodo = async TodoId => {
 const updateTodo = async (TodoId, pathData) => {
   try {
     const response = await axiosAuthInstance.put(`/todos/${TodoId}`, pathData);
-    return response;
+    return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       return error.response;
