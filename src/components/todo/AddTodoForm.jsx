@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import todoApi from '../../api/todo';
-import DefaultButton from '../buttons/DefaultButton';
 import Input from '../inputs/Input';
+import SubmitButton from '../buttons/SubmitButton';
 
 function AddTodoForm({ refreshHandler }) {
   const [myTodo, setMyTodo] = useState();
@@ -18,7 +18,7 @@ function AddTodoForm({ refreshHandler }) {
     await todoApi.createTodo({ todo: myTodo });
 
     setMyTodo('');
-    await refreshHandler();
+    refreshHandler();
   };
 
   return (
@@ -31,12 +31,7 @@ function AddTodoForm({ refreshHandler }) {
         value={myTodo}
         onChange={onChangeHandler}
       />
-      <DefaultButton
-        onClick={todoSubmitHandler}
-        data-testid="new-todo-add-button"
-      >
-        추가
-      </DefaultButton>
+      <SubmitButton data-testid="new-todo-add-button">추가</SubmitButton>
     </form>
   );
 }

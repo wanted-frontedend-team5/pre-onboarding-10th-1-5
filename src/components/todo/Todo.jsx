@@ -11,8 +11,7 @@ function Todo({ todo, refreshHandler }) {
   };
 
   const deleteTodoHandler = async () => {
-    const deleteRes = await todoApi.deleteTodo(todo.id);
-    if (deleteRes?.ok) alert('성공적으로 삭제됐습니다.');
+    await todoApi.deleteTodo(todo.id);
     refreshHandler();
   };
 

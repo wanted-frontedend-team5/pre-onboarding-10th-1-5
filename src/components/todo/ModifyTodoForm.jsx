@@ -38,11 +38,7 @@ function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
         onChange={onChangeHandler}
       />
       <SubmitButton data-testid="submit-button">추가</SubmitButton>
-      <DefaultButton
-        type="button"
-        data-testid="cancel-button"
-        onClick={closeHandler}
-      >
+      <DefaultButton data-testid="cancel-button" onClick={closeHandler}>
         취소
       </DefaultButton>
     </form>
