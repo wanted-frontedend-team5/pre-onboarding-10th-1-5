@@ -210,6 +210,120 @@ className={`${globalStyle.inputStyle}${		disabled ? 'bg-gray-100' : 'bg-white' }
 
 ## 2. 성능이 좋은 코드 & 확장 가능성이 있는 코드
 
+### createBrowserRouter
+
+- react-router 6.4 버전 이상에서 사용할 수 있는 `createBrowserRouter` 로 한번에 path와 element를 다룰 수 있다.
+- 페이지 별로 useEffect를 사용해서 token의 여부를 확인하고 리다이렉트 처리를 하는것이 아닌, createBrowserRouter의 loader를 사용해서 페이지의 불필요한 책임을 제거했다.
+- 인증이 필요한 `todo` 페이지는 `ProtectedRoute` 를 레이아웃 패턴을 이용해서 인증 처리
+
+```jsx
+ const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/signin" />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: '/signin',
+    element: <SignIn />,
+    loader: () => {
+      if (token) {
+        throw redirect('/todo');
+      }
+      return null;
+    },
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
+    loader: () => {
+      if (token) {
+        throw redirect('/todo');
+      }
+      return null;
+    },
+  },
+  {
+    path: '/todo',
+    element: (
+      <ProtectedRoute>
+        <Todo />
+      </ProtectedRoute>
+    ),
+  },
+]);
+```
+
+### Input 컴포넌트와 Button 컴포넌트
+
+- input과 label을 함께 선언하고, 스타일로 묶어줘서 `Input` 컴포넌트로 사용
+
+```jsx
+import globalStyle from 'utils/globalStyle';
+
+function Input({...}) {
+  return (
+    <label htmlFor={id} className="flex flex-col">
+      {label}
+      <input
+        data-testid={dataTestid}
+        placeholder={label}
+        onChange={onChange}
+        type={type}
+        id={id}
+        name={name}
+        value={value}
+        className={`${globalStyle.inputStyle}${
+          disabled ? 'bg-gray-100' : 'bg-white'
+        } ${className}`}
+      />
+    </label>
+  );
+}
+
+export default Input;
+```
+
+- button을 타입에 따라서 props와 스타일을 지정해서 `DefaultButton`, `SubmitButton`나누어서 사용
+
+`DefaultButton.js`
+
+```
+function DefaultButton({ children, onClick, dataTestid = '' }) {
+  return (
+    <button
+      className={globalStyle.smButtonStyle}
+      onClick={onClick}
+      type="button"
+      data-testid={dataTestid}
+    >
+      {children}
+    </button>
+  );
+}
+
+```
+
+`SubmitButton.js`
+
+```jsx
+
+function SubmitButton({ dataTestid, children, isSuccess = true }) {
+  return (
+    <button
+      className={globalStyle.buttonStyle}
+      type="submit"
+      data-testid={dataTestid}
+      disabled={isSuccess ? null : 'disabled'}
+    >
+      {children}
+    </button>
+  );
+}
+
+export default SubmitButton;
+```
+
 ---
 
 ### 자주 사용하는 함수를 커스텀 훅을 활용해서 분리 및 재사용
@@ -263,11 +377,6 @@ const useInputValidation = (initialValue, validationFunction) => {
   // ...
 }
 ```
-
-### Router
-
-- 파일을 모듈화 해서 관리
-- router 객체 내부에서 토큰을 검사하는 component 사용
 
 ### 유틸리티 함수 활용
 
