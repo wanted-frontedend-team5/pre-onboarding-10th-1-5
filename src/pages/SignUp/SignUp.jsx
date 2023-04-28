@@ -65,7 +65,7 @@ function SignUp() {
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <ErrorMessage errorMessage={errorMessage} />
 
-        <SubmitButton data-testid="signup-button" isSuccess={isSuccess}>
+        <SubmitButton dataTestid="signup-button" isSuccess={isSuccess}>
           Sign Up
         </SubmitButton>
       </form>

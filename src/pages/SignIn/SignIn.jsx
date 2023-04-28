@@ -68,7 +68,7 @@ function SignIn() {
         <p>
           <Link to="/signup">회원가입하러가기</Link>
         </p>
-        <SubmitButton data-testid="signin-button" isSuccess={isSuccess}>
+        <SubmitButton dataTestid="signin-button" isSuccess={isSuccess}>
           Sign In
         </SubmitButton>
       </form>
