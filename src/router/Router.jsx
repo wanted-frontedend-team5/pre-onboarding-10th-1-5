@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import SignIn from '../pages/SignIn/SignIn';
 import SignUp from '../pages/SignUp/SignUp';
-import ProtectedRoute from '../components/HOC/auth/ProtectedRoute';
+// import ProtectedRoute from '../components/HOC/auth/ProtectedRoute';
 import Todo from '../pages/Todo/Todo';
 import NotFound from '../pages/NotFound/NotFound';
 
@@ -22,9 +22,9 @@ const router = createBrowserRouter([
   {
     path: '/todo',
     element: (
-      <ProtectedRoute require>
-        <Todo />
-      </ProtectedRoute>
+      // <ProtectedRoute require>
+      <Todo />
+      // </ProtectedRoute>
     ),
   },
 ]);

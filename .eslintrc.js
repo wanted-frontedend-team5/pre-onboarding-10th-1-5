@@ -8,6 +8,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/recommended',
     'airbnb',
+    'airbnb/hooks',
   ],
   overrides: [],
   parserOptions: {
