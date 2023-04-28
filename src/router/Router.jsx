@@ -5,12 +5,12 @@ import {
   redirect,
   RouterProvider,
 } from 'react-router-dom';
-import SignIn from '../pages/SignIn/SignIn';
-import SignUp from '../pages/SignUp/SignUp';
-import ProtectedRoute from '../components/HOC/auth/ProtectedRoute';
-import Todo from '../pages/Todo/Todo';
-import NotFound from '../pages/NotFound/NotFound';
-import { getUserTokenInLocalStorage } from '../utils/localTokenUtils';
+import SignIn from 'pages/SignIn/SignIn';
+import SignUp from 'pages/SignUp/SignUp';
+import ProtectedRoute from 'components/HOC/auth/ProtectedRoute';
+import Todo from 'pages/Todo/Todo';
+import NotFound from 'pages/NotFound/NotFound';
+import { getUserTokenInLocalStorage } from 'utils/localTokenUtils';
 
 const token = getUserTokenInLocalStorage();
 

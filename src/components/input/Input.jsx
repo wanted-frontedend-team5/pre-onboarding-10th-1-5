@@ -1,4 +1,4 @@
-import globalStyle from '../../utils/globalStyle';
+import globalStyle from 'utils/globalStyle';
 
 function Input({
   dataTestid,
@@ -9,6 +9,7 @@ function Input({
   value,
   className,
   disabled,
+  name = id,
 }) {
   return (
     <label htmlFor={id} className="flex flex-col">
@@ -19,6 +20,7 @@ function Input({
         onChange={onChange}
         type={type}
         id={id}
+        name={name}
         value={value}
         className={`${globalStyle.inputStyle}${
           disabled ? 'bg-gray-100' : 'bg-white'

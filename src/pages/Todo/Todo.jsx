@@ -18,7 +18,7 @@ function Todo() {
 
   const logOutHandler = () => {
     removeUserTokenInLocalStorage();
-    navigate('/todo');
+    navigate('/');
   };
 
   useEffect(() => {

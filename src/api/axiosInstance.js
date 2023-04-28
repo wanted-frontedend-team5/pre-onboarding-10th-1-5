@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { BASE_URL } from '../constant/config';
-import { getUserTokenInLocalStorage } from '../utils/localTokenUtils';
+import { BASE_URL } from 'constant/config';
+import { getUserTokenInLocalStorage } from 'utils/localTokenUtils';
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,

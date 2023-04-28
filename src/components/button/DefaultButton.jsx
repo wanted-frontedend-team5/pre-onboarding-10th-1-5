@@ -1,6 +1,6 @@
 import globalStyle from '../../utils/globalStyle';
 
-function DefaultButton({ dataTestid, children, onClick }) {
+function DefaultButton({ children, onClick, dataTestid = '' }) {
   return (
     <button
       className={globalStyle.buttonStyle}

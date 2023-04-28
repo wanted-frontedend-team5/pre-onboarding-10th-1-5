@@ -4,7 +4,7 @@ import validationEmail from 'utils/validationEmail';
 import validationPassword from 'utils/validationPassword';
 import authApi from 'api/auth';
 import Input from 'components/input/Input';
-import SubmitButton from 'components/SubmitButton';
+import SubmitButton from 'components/button/SubmitButton';
 import ErrorMessage from 'components/ErrorMessage';
 import useInputValidation from 'hooks/useInputValidation';
 import { putUserTokenInLocalStorage } from 'utils/localTokenUtils';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { getUserTokenInLocalStorage } from '../../../utils/localTokenUtils';
+import { getUserTokenInLocalStorage } from 'utils/localTokenUtils';
 
 export default function ProtectedRoute({ children }) {
   const token = getUserTokenInLocalStorage();
