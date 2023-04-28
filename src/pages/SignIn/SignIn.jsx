@@ -31,10 +31,9 @@ function SignIn() {
     pathData.email = email;
     pathData.password = password;
 
-    const data = await authApi.signIn(pathData);
-
-    if (data.status === 200) {
-      putUserTokenInLocalStorage(data.access_token);
+    const res = await authApi.signIn(pathData);
+    if (res.status === 200) {
+      putUserTokenInLocalStorage(res.data.access_token);
       navigate('/todo');
     } else {
       setErrorMessage(
