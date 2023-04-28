@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import authApi from '../../api/auth';
@@ -16,7 +17,7 @@ function SignIn() {
 
   const [password, isPasswordSuccess, handleChangePassword] =
     useInputValidation('', validationPassword);
-
+  const [errorMessage, setErrorMessage] = useState('');
   const isSuccess = isEmailSuccess.isSuccess && isPasswordSuccess.isSuccess;
   const navigate = useNavigate();
 
@@ -35,6 +36,10 @@ function SignIn() {
     if (data.status === 200) {
       putUserTokenInLocalStorage(data.access_token);
       navigate('/todo');
+    } else {
+      setErrorMessage(
+        ' 이메일 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.',
+      );
     }
   };
 
@@ -60,6 +65,7 @@ function SignIn() {
           onChange={handleChangePassword}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
+        <ErrorMessage errorMessage={errorMessage} />
         <Button
           onClick={handleClick}
           data-testid="signin-button"
