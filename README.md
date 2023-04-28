@@ -117,7 +117,7 @@ npm start
 - 추후 확장가능성을 고려한 구조.
 
 
-## [유틸리티 ] Best Practice 요소
+## [utility] Best Practice 요소
 
 검증 : 정규식
 
