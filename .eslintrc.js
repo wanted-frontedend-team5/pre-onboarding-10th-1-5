@@ -16,8 +16,12 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    indent: 'off',
+
     // labelAttributes: 0,
     // for enabling the rule. 0=off, 1=warn, 2=error. Defaults to 0.
+
+    'object-curly-newline': 'off',
     'linebreak-style': 0,
     'import/prefer-default-export': 0,
     'import/extensions': 0,
@@ -57,6 +61,7 @@ module.exports = {
       'error',
       {
         endOfLine: 'auto',
+        defaultAssignment: 'false',
       },
     ],
   },

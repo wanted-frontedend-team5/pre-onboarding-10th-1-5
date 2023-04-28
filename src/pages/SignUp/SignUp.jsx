@@ -1,72 +1,71 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { postSignUp } from '../../Api/method';
-
-const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$/;
-const PASSWORD_REGEX = /.{8,}/;
+import { useNavigate } from 'react-router';
+import validationEmail from '../../utils/validationEmail';
+import validationPassword from '../../utils/validationPassword';
+import Input from '../../components/Input';
+import authApi from '../../Api/auth';
+import useInputValidation from '../../hooks/useInputValidation';
+import Button from '../../components/Button';
+import ErrorMessage from '../../components/ErrorMessage';
 
 function SignUp() {
-  const [input, setInput] = useState({ email: '', password: '' });
-  const [disable, setDisable] = useState(true);
+  const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
+    '',
+    validationEmail,
+  );
+  // eslint-disable-next-line operator-linebreak
+  const [password, isPasswordSuccess, handleChangePassword] =
+    useInputValidation('', validationPassword);
+
+  const isSuccess = isEmailSuccess.isSuccess && isPasswordSuccess.isSuccess;
   const navigate = useNavigate();
 
-  const onChangeHandler = e => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
+  const pathData = {
+    email: '',
+    password: '',
   };
 
-  const onSubmitHandler = e => {
+  const handleClick = async e => {
     e.preventDefault();
-    postSignUp(input);
-    navigate('/signin');
+    pathData.email = email;
+    pathData.password = password;
+    try {
+      await authApi.signUp(pathData);
+      navigate('/signin');
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  useEffect(() => {
-    if (EMAIL_REGEX.test(input.email) && PASSWORD_REGEX.test(input.password)) {
-      setDisable(false);
-    } else setDisable(true);
-  }, [input]);
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
-        <div>
-          <label htmlFor="email-input" aria-controls="email-input">
-            email
-          </label>
-          <input
-            type="text"
-            name="email"
-            id="email-input"
-            data-testid="email-input"
-            placeholder="email"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"
-            title="@을 포함한 email을 입력해주세요."
-            required
-            onChange={onChangeHandler}
-            value={input.email}
-          />
-        </div>
-        <div>
-          <label htmlFor="password-input" aria-controls="password-input">
-            password
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password-input"
-            data-testid="password-input"
-            placeholder="password"
-            pattern=".{8,}"
-            title="비밀번호는 8자 이상입니다."
-            required
-            onChange={onChangeHandler}
-            value={input.password}
-          />
-        </div>
-        <button data-testid="signup-button" type="submit" disabled={disable}>
-          회원가입
-        </button>
+    <div className="w-full">
+      <h1 className="text-3xl">Sign Up</h1>
+      <form className="space-y-1">
+        <Input
+          type="email"
+          label="Email"
+          dataTestid="email-input"
+          id="signup__email-input"
+          value={email}
+          onChange={handleChangeEmail}
+        />
+        <ErrorMessage errorMessage={isEmailSuccess.errorMessage} />
+        <Input
+          type="password"
+          label="Password"
+          dataTestid="password-input"
+          id="signup__password-input"
+          value={password}
+          onChange={handleChangePassword}
+          errorMessage={isPasswordSuccess.errorMessage}
+        />
+        <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
+        <Button
+          onClick={handleClick}
+          data-testid="signup-button"
+          isSuccess={isSuccess}
+        >
+          Sign Up
+        </Button>
       </form>
     </div>
   );
