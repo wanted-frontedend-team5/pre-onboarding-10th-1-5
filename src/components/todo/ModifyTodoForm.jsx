@@ -5,6 +5,7 @@ import Input from 'components/input/Input';
 import useInput from 'hooks/useInput';
 
 function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
+  
   const [{ modifyTodo }, onChange, setValue] = useInput({
     modifyTodo: todo.todo,
   });
