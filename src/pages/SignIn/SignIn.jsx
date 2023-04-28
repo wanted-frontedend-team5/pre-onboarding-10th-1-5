@@ -48,7 +48,7 @@ function SignIn() {
       <h1 className="text-3xl">Sign In</h1>
       <form className=" space-y-1" onSubmit={handleSubmit}>
         <Input
-          type="email"
+          type="text"
           label="Email"
           dataTestid="email-input"
           id="signup__email-input"
