@@ -8,13 +8,13 @@ function Todo() {
   // 상태 선언
   const [inputValue, setInputValue] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [toDos, setToDo] = useToDoList();
+  const [toDos, setToDos] = useToDoList();
 
   // 서버에서 todo data를 받아와 toDos에 갱신
-  // const getToDos = async () => {
-  //   const response = toDoApi.getTodos();
-  //   setToDos(response.data);
-  // };
+  const getToDos = async () => {
+    const response = toDoApi.getTodos();
+    setToDos(response.data);
+  };
   // 새로 입력받은 todo를 서버에 post, 화면의 toDos 갱신
   const addToDo = async () => {
     const createNewToDo = {
@@ -60,6 +60,7 @@ function Todo() {
             todo={todo}
             deleteToDo={deleteToDo}
             setCheck={setCheck}
+            getToDos={getToDos}
           />
         ))}
       </ul>
