@@ -4,10 +4,11 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:import/recommended',
     'airbnb',
+    'airbnb/hooks',
+    'plugin:prettier/recommended',
   ],
   overrides: [],
   parserOptions: {

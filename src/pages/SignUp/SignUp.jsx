@@ -12,7 +12,7 @@ function SignUp() {
     '',
     validationEmail,
   );
-  // eslint-disable-next-line operator-linebreak
+
   const [password, isPasswordSuccess, handleChangePassword] =
     useInputValidation('', validationPassword);
 

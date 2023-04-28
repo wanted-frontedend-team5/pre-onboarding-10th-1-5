@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import authApi from '../../Api/auth';
@@ -6,6 +7,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
 import useInputValidation from '../../hooks/useInputValidation';
+import { putUserTokenInLocalStorage } from '../../utils/localTokenUtils';
 
 function SignIn() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -13,10 +15,9 @@ function SignIn() {
     validationEmail,
   );
 
-  // eslint-disable-next-line operator-linebreak
   const [password, isPasswordSuccess, handleChangePassword] =
     useInputValidation('', validationPassword);
-
+  const [errorMessage, setErrorMessage] = useState('');
   const isSuccess = isEmailSuccess.isSuccess && isPasswordSuccess.isSuccess;
   const navigate = useNavigate();
 
@@ -29,12 +30,16 @@ function SignIn() {
     e.preventDefault();
     pathData.email = email;
     pathData.password = password;
-    try {
-      const data = await authApi.signIn(pathData);
-      localStorage.setItem('access_token', data.access_token);
-      if (localStorage.getItem('access_token')) navigate('/todo');
-    } catch (error) {
-      console.error(error);
+
+    const data = await authApi.signIn(pathData);
+
+    if (data.status === 200) {
+      putUserTokenInLocalStorage(data.access_token);
+      navigate('/todo');
+    } else {
+      setErrorMessage(
+        ' 이메일 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.',
+      );
     }
   };
 
@@ -60,6 +65,7 @@ function SignIn() {
           onChange={handleChangePassword}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
+        <ErrorMessage errorMessage={errorMessage} />
         <Button
           onClick={handleClick}
           data-testid="signin-button"
