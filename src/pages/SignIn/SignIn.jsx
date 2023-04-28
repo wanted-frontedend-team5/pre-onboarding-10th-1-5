@@ -6,10 +6,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
 import useInputValidation from '../../hooks/useInputValidation';
-import {
-  getUserTokenInLocalStorage,
-  putUserTokenInLocalStorage,
-} from '../../utils/localTokenUtils';
+import { putUserTokenInLocalStorage } from '../../utils/localTokenUtils';
 
 function SignIn() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -33,9 +30,12 @@ function SignIn() {
     pathData.email = email;
     pathData.password = password;
     try {
-      const data = await authApi.signIn(pathData);
-      putUserTokenInLocalStorage(data.access_token);
-      if (getUserTokenInLocalStorage()) navigate('/todo');
+      const res = await authApi.signIn(pathData);
+      console.log(res.data.access_token);
+      if (res.data.access_token) {
+        putUserTokenInLocalStorage(res.data.access_token);
+        navigate('/todo');
+      }
     } catch (error) {
       console.error(error);
     }
