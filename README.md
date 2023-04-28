@@ -1,6 +1,6 @@
 # 원티프 프리온보딩 인턴쉽 1주차 과제 5팀
 
-인턴쉽 1주차 과제
+[원티드 프리온보딩 프론트엔드 인턴쉽]([https://www.wanted.co.kr/events/pre_ob_fe_9?utm_source=email&utm_medium=braze_mkt&utm_campaign=learning_pre_ob_fe_9](https://www.wanted.co.kr/events/pre_ob_fe_10)) 1주차 과제입니다. [가이드라인](https://github.com/walking-sunset/selection-task)과 강의 자료 중 과제 피드백을 준수하였습니다.
 
 ## Install
 ```
