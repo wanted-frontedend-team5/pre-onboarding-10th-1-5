@@ -26,7 +26,7 @@ function Todo({ todo, refreshHandler }) {
   };
 
   return (
-    <li>
+    <li className="flex flex-row gap-2">
       {modifyMode && (
         <ModifyTodoForm
           todo={todo}

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import validationEmail from 'utils/validationEmail';
 import validationPassword from 'utils/validationPassword';
@@ -65,6 +65,9 @@ function SignIn() {
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <ErrorMessage errorMessage={errorMessage} />
+        <p>
+          <Link to="/signup">회원가입하러가기</Link>
+        </p>
         <SubmitButton data-testid="signin-button" isSuccess={isSuccess}>
           Sign In
         </SubmitButton>
