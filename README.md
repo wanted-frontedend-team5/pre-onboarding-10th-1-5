@@ -1,9 +1,15 @@
-# pre-onboarding-10th-1-5
+# 원티프 프리온보딩 인턴쉽 1주차 과제 5팀
 
 인턴쉽 1주차 과제
 
-`npm install`
-`npm start`
+## Install
+```
+npm install
+```
+## Start
+```
+npm start
+```
 
 ### API
 
