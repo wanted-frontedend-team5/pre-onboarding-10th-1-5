@@ -2,7 +2,7 @@ import Todo from './Todo';
 
 function TodoList({ todoList, fetchTodoRequest }) {
   return (
-    <ul>
+    <ul className="flex flex-col">
       {todoList.length === 0 && <h1>리스트가 존재하지 않습니다.</h1>}
       {todoList.length > 0 &&
         todoList.map(todo => {

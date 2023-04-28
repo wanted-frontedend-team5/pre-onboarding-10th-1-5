@@ -1,9 +1,7 @@
-import globalStyle from 'utils/globalStyle';
-
-function SubmitButton({ dataTestid, children, isSuccess = true }) {
+function SubmitButton({ dataTestid, children, isSuccess = true, className }) {
   return (
     <button
-      className={globalStyle.buttonStyle}
+      className={className}
       type="submit"
       data-testid={dataTestid}
       disabled={isSuccess ? null : 'disabled'}

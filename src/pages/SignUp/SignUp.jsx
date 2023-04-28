@@ -7,6 +7,7 @@ import useInputValidation from 'hooks/useInputValidation';
 import SubmitButton from 'components/button/SubmitButton';
 import ErrorMessage from 'components/ErrorMessage';
 import { useState } from 'react';
+import globalStyle from 'utils/globalStyle';
 
 function SignUp() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -52,6 +53,7 @@ function SignUp() {
           id="signup__email-input"
           value={email}
           onChange={handleChangeEmail}
+          className={globalStyle.inputStyle}
         />
         <ErrorMessage errorMessage={isEmailSuccess.errorMessage} />
         <Input
@@ -62,11 +64,16 @@ function SignUp() {
           value={password}
           onChange={handleChangePassword}
           errorMessage={isPasswordSuccess.errorMessage}
+          className={globalStyle.inputStyle}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <ErrorMessage errorMessage={errorMessage} />
 
-        <SubmitButton dataTestid="signup-button" isSuccess={isSuccess}>
+        <SubmitButton
+          dataTestid="signup-button"
+          isSuccess={isSuccess}
+          className={globalStyle.buttonStyle}
+        >
           Sign Up
         </SubmitButton>
       </form>
