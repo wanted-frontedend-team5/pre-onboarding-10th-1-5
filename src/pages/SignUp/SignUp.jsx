@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import Input from '../../components/Input';
@@ -6,6 +7,7 @@ import authApi from '../../api/auth';
 import useInputValidation from '../../hooks/useInputValidation';
 import Button from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
+import { getUserTokenInLocalStorage } from '../../utils/localTokenUtils';
 
 function SignUp() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -35,6 +37,12 @@ function SignUp() {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (getUserTokenInLocalStorage()) {
+      navigate('/todo');
+    }
+  }, [navigate]);
 
   return (
     <div className="w-full">

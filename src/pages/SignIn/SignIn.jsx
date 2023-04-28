@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useEffect } from 'react';
 import validationEmail from '../../utils/validationEmail';
 import validationPassword from '../../utils/validationPassword';
 import authApi from '../../api/auth';
@@ -41,6 +42,12 @@ function SignIn() {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (getUserTokenInLocalStorage()) {
+      navigate('/todo');
+    }
+  }, [navigate]);
 
   return (
     <div className=" w-full">
