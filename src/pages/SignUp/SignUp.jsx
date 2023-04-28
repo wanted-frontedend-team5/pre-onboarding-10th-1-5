@@ -13,6 +13,7 @@ function SignUp() {
     '',
     validationEmail,
   );
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const [password, isPasswordSuccess, handleChangePassword] =
