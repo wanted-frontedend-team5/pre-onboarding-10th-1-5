@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import todoApi from '../../api/todo';
 import RemoveButton from './RemoveButton';
@@ -28,7 +27,7 @@ export default function TodoItem({ todoData, getTodos }) {
     <li className="flex flex-row">
       {isModify ? (
         <form onSubmit={handleUpdate}>
-          <label>
+          <label htmlFor="checkbox">
             <input
               type="checkbox"
               checked={isChecked}
