@@ -13,7 +13,7 @@ function SignUp() {
     '',
     validationEmail,
   );
-  
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const [password, isPasswordSuccess, handleChangePassword] =
@@ -31,7 +31,7 @@ function SignUp() {
     e.preventDefault();
     pathData.email = email;
     pathData.password = password;
-    
+
     const res = await authApi.signUp(pathData);
     if (res.status === 201) {
       navigate('/signin');
@@ -65,7 +65,8 @@ function SignUp() {
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <ErrorMessage errorMessage={errorMessage} />
-        <SubmitButton data-testid="signup-button" isSuccess={isSuccess}>
+
+        <SubmitButton dataTestid="signup-button" isSuccess={isSuccess}>
           Sign Up
         </SubmitButton>
       </form>

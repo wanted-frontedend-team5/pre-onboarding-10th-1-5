@@ -26,7 +26,7 @@ function AddTodoForm({ refreshHandler }) {
         value={todo}
         onChange={onChange}
       />
-      <SubmitButton data-testid="new-todo-add-button">추가</SubmitButton>
+      <SubmitButton dataTestid="new-todo-add-button">추가</SubmitButton>
     </form>
   );
 }

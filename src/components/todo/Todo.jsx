@@ -44,16 +44,10 @@ function Todo({ todo, refreshHandler }) {
             />
             {todo.todo}
           </p>
-          <DefaultButton
-            data-testid="modify-button"
-            onClick={modifyFormHandler}
-          >
+          <DefaultButton dataTestid="modify-button" onClick={modifyFormHandler}>
             수정
           </DefaultButton>
-          <DefaultButton
-            data-testid="delete-button"
-            onClick={deleteTodoHandler}
-          >
+          <DefaultButton dataTestid="delete-button" onClick={deleteTodoHandler}>
             삭제
           </DefaultButton>
         </>
