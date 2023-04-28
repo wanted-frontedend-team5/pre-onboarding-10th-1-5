@@ -1,23 +1,18 @@
-import { useState } from 'react';
 import todoApi from '../../api/todo';
 import Input from '../inputs/Input';
 import SubmitButton from '../buttons/SubmitButton';
+import useInput from '../../hooks/useInput';
 
 function AddTodoForm({ refreshHandler }) {
-  const [myTodo, setMyTodo] = useState();
-
-  const onChangeHandler = e => {
-    setMyTodo(e.currentTarget.value);
-  };
+  const [{ todo }, onChange, setValue] = useInput({ todo: '' });
 
   const todoSubmitHandler = async e => {
     e.preventDefault();
 
-    if (myTodo.trim().length === 0) return;
+    if (todo.trim().length === 0) return;
 
-    await todoApi.createTodo({ todo: myTodo });
-
-    setMyTodo('');
+    await todoApi.createTodo({ todo });
+    setValue('todo', '');
     refreshHandler();
   };
 
@@ -27,9 +22,9 @@ function AddTodoForm({ refreshHandler }) {
         type="text"
         label="할 일 작성"
         dataTestid="new-todo-input"
-        id="myTodo"
-        value={myTodo}
-        onChange={onChangeHandler}
+        name="todo"
+        value={todo}
+        onChange={onChange}
       />
       <SubmitButton data-testid="new-todo-add-button">추가</SubmitButton>
     </form>

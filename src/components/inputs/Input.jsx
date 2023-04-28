@@ -3,6 +3,7 @@ import globalStyle from '../../utils/globalStyle';
 function Input({
   dataTestid,
   type,
+  name,
   label,
   id,
   onChange,
@@ -17,6 +18,7 @@ function Input({
         data-testid={dataTestid}
         placeholder={label}
         onChange={onChange}
+        name={name}
         type={type}
         id={id}
         value={value}

@@ -1,15 +1,11 @@
-import { useState } from 'react';
 import todoApi from '../../api/todo';
 import DefaultButton from '../buttons/DefaultButton';
 import Input from '../inputs/Input';
 import SubmitButton from '../buttons/SubmitButton';
+import useInput from '../../hooks/useInput';
 
 function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
-  const [modifyTodo, setMyTodo] = useState();
-
-  const onChangeHandler = e => {
-    setMyTodo(e.currentTarget.value);
-  };
+  const [{ modifyTodo }, onChange, setValue] = useInput({ modifyTodo: '' });
 
   const todoSubmitHandler = async e => {
     e.preventDefault();
@@ -23,6 +19,8 @@ function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
 
     await todoApi.updateTodo(info);
 
+    setValue('setValue', '');
+
     refreshHandler();
     closeHandler();
   };
@@ -33,9 +31,10 @@ function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
         type="text"
         label="수정할 Todo 작성"
         dataTestid="modify-input"
-        id="myTodo"
+        name={modifyTodo}
+        id="modifyTodo"
         value={modifyTodo}
-        onChange={onChangeHandler}
+        onChange={onChange}
       />
       <SubmitButton data-testid="submit-button">추가</SubmitButton>
       <DefaultButton data-testid="cancel-button" onClick={closeHandler}>
