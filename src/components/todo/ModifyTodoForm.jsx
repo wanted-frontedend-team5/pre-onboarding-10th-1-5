@@ -5,7 +5,10 @@ import Input from 'components/input/Input';
 import useInput from 'hooks/useInput';
 
 function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
-  const [{ modifyTodo }, onChange, setValue] = useInput({ modifyTodo: '' });
+  
+  const [{ modifyTodo }, onChange, setValue] = useInput({
+    modifyTodo: todo.todo,
+  });
 
   const todoSubmitHandler = async e => {
     e.preventDefault();
@@ -26,17 +29,20 @@ function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
   };
 
   return (
-    <form onSubmit={todoSubmitHandler}>
+    <form
+      onSubmit={todoSubmitHandler}
+      className="w-full align-bottom flex justify-between"
+    >
       <Input
         type="text"
         label="수정할 Todo 작성"
         dataTestid="modify-input"
-        name={modifyTodo}
+        name="modifyTodo"
         id="modifyTodo"
         value={modifyTodo}
         onChange={onChange}
       />
-      <SubmitButton data-testid="submit-button">추가</SubmitButton>
+      <SubmitButton data-testid="submit-button">제출</SubmitButton>
       <DefaultButton data-testid="cancel-button" onClick={closeHandler}>
         취소
       </DefaultButton>

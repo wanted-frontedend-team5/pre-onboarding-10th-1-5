@@ -6,12 +6,15 @@ import authApi from 'api/auth';
 import useInputValidation from 'hooks/useInputValidation';
 import SubmitButton from 'components/button/SubmitButton';
 import ErrorMessage from 'components/ErrorMessage';
+import { useState } from 'react';
 
 function SignUp() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
     '',
     validationEmail,
   );
+  
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [password, isPasswordSuccess, handleChangePassword] =
     useInputValidation('', validationPassword);
@@ -28,11 +31,13 @@ function SignUp() {
     e.preventDefault();
     pathData.email = email;
     pathData.password = password;
-    try {
-      await authApi.signUp(pathData);
+    
+    const res = await authApi.signUp(pathData);
+    if (res.status === 201) {
       navigate('/signin');
-    } catch (error) {
-      console.error(error);
+    }
+    if (res.status === 400) {
+      setErrorMessage(' 이미 존재하는 계정입니다. ');
     }
   };
 
@@ -59,6 +64,7 @@ function SignUp() {
           errorMessage={isPasswordSuccess.errorMessage}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
+        <ErrorMessage errorMessage={errorMessage} />
         <SubmitButton data-testid="signup-button" isSuccess={isSuccess}>
           Sign Up
         </SubmitButton>
