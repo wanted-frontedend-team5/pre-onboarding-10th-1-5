@@ -95,7 +95,7 @@ npm start
 - docs: Everything related to documentation
 - chore: Regular code maintenance.
 
-## [경로설정] Best Practice 요소
+## [path] Best Practice 요소
 
 - src 폴더를 절대 경로로 설정해서 간결한 import 경로 설정 가능
 
@@ -143,7 +143,7 @@ export const removeUserTokenInLocalStorage = () => {
 - 차후에 수정이 필요하면 `localTokenUtils` 파일만 변경하면 된다.
 
 ## [Router, ProtectedRoute] Best Practice 요소
-- React Router v4.6 최신버전을 사용함으로써 추후 클라이언트 측 라우팅과 같은 새로운 기술 도입이 가능합니다.
+- React Router v6.4 최신버전을 사용함으로써 추후 클라이언트 측 라우팅과 같은 새로운 기술 도입이 가능합니다.
 - protectedRoute를 사용함으로써 인증된 사용자만 특정 경로로 접근할 수 있으며 보안과 관련된 이슈로, 일부 페이지나 기능에 대해 권한이 없는 사용자가 접근을 막아줄 수 있습니다.
 - protectedRoute를 컴포넌트로 분리하여 Router.jsx에서 사용함으로써 가독성이 좋습니다.
 ```jsx
