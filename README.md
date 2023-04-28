@@ -4,6 +4,97 @@
 
 `npm install`
 `npm start`
+
+## [Router, ProtectedRoute] Best Practice 요소
+- React Router v4.6 최신버전을 사용함으로써 추후 클라이언트 측 라우팅과 같은 새로운 기술 도입이 가능합니다.
+- protectedRoute를 사용함으로써 인증된 사용자만 특정 경로로 접근할 수 있으며 보안과 관련된 이슈로, 일부 페이지나 기능에 대해 권한이 없는 사용자가 접근을 막아줄 수 있습니다.
+- protectedRoute를 컴포넌트로 분리하여 Router.jsx에서 사용함으로써 가독성이 좋습니다.
+```jsx
+// Router.jsx
+ {
+    path: '/todo',
+    element: (
+      <ProtectedRoute>
+        <Todo />
+      </ProtectedRoute>
+    ),
+  },
+```
+```jsx
+// protectedRoute.jsx
+export default function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('access_token');
+
+  if (!token) {
+    return <Navigate to="/signin" />;
+  }
+
+  return children;
+}
+```
+## [`redirect` 메서드를 통한 성능 향상 useEffect vs redirect] Best Practice 요소
+기존 코드는 페이지마다 useEffect를 사용해서 로컬스토리지에 토큰이 있을 때 todo 페이지로 리다이렉트 되도록 작성했습니다.
+해당 코드는 아래와 같은 단점이 있습니다.
+- 개별 컴포넌트에서 useEffect를 사용하면 해당 컴포넌트가 렌더링되고 난 후에 리다이렉션이 발생하므로 불필요한 렌더링이 발생해서 성능이슈가 발생할 수 있습니다.
+- 어느 페이지에서 useEffect를 사용했는지 알 수 없기 때문에 에러핸들링이 어렵고 유지보수성, 가독성 떨어진다는 단점이 있었습니다.
+```jsx
+// 기존 코드
+// SignIn.jsx, SignUp.jsx 중복 코드
+useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      navigate("/todo");
+    }
+  }, [navigate]);
+```
+따라서 아래와 같이 react-router v6.4에서 지원하는 로더(Loader)에서 `redirect`를 사용하여 개선하였습니다.
+- 로더(Loader)에서 `redirect`를 사용하면 컴포넌트를 렌더링하기 전에 바로 리다이렉트가 수행되므로 불필요한 렌더링을 방지할 수 있습니다.
+- 로더에서 `redirect`를 사용함으로써 리다이렉트 로직을 한 곳에 모아서 유지보수가 쉽습니다.
+```jsx
+// 개선 코드
+// Router.jsx
+const token = getUserTokenInLocalStorage();
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/signin" />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: '/signin',
+    element: <SignIn />,
+    loader: () => {
+      if (token) {
+        throw redirect('/todo');
+      }
+      return null;
+    },
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
+    loader: () => {
+      if (token) {
+        throw redirect('/todo');
+      }
+      return null;
+    },
+  },
+  {
+    path: '/todo',
+    element: (
+      <ProtectedRoute>
+        <Todo />
+      </ProtectedRoute>
+    ),
+  },
+]);
+
+export default function Router() {
+  return <RouterProvider router={router} />;
+}
+```
 ## [Form, Style] Best Practice 요소
 ### **빠른 사용자 피드백**
 
