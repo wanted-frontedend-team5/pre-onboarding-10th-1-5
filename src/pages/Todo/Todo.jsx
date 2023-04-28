@@ -26,7 +26,7 @@ function Todo() {
   }, [fetchTodoRequest]);
 
   return (
-    <div className=" w-full">
+    <div className="space-y-1 w-full">
       <h1 className="text-2xl">투두리스트 페이지 입니다.</h1>
       <DefaultButton onClick={logOutHandler}>로그아웃하기</DefaultButton>
       <AddTodoForm refreshHandler={fetchTodoRequest} />

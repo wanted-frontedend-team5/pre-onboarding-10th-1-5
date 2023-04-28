@@ -26,7 +26,7 @@ function Todo({ todo, refreshHandler }) {
   };
 
   return (
-    <li className="flex flex-row gap-2">
+    <li className="flex justify-between">
       {modifyMode && (
         <ModifyTodoForm
           todo={todo}
@@ -41,15 +41,23 @@ function Todo({ todo, refreshHandler }) {
               type="checkbox"
               onChange={updateCheckedHandler}
               checked={todo.isCompleted}
-            />
+            />{' '}
             {todo.todo}
           </p>
-          <DefaultButton dataTestid="modify-button" onClick={modifyFormHandler}>
-            수정
-          </DefaultButton>
-          <DefaultButton dataTestid="delete-button" onClick={deleteTodoHandler}>
-            삭제
-          </DefaultButton>
+          <div>
+            <DefaultButton
+              dataTestid="modify-button"
+              onClick={modifyFormHandler}
+            >
+              수정
+            </DefaultButton>
+            <DefaultButton
+              dataTestid="delete-button"
+              onClick={deleteTodoHandler}
+            >
+              삭제
+            </DefaultButton>
+          </div>
         </>
       )}
     </li>

@@ -9,6 +9,7 @@ import SubmitButton from 'components/button/SubmitButton';
 import ErrorMessage from 'components/ErrorMessage';
 import useInputValidation from 'hooks/useInputValidation';
 import { putUserTokenInLocalStorage } from 'utils/localTokenUtils';
+import globalStyle from 'utils/globalStyle';
 
 function SignIn() {
   const [email, isEmailSuccess, handleChangeEmail] = useInputValidation(
@@ -48,12 +49,13 @@ function SignIn() {
       <h1 className="text-3xl">Sign In</h1>
       <form className=" space-y-1" onSubmit={handleSubmit}>
         <Input
-          type="email"
+          type="text"
           label="Email"
           dataTestid="email-input"
           id="signup__email-input"
           value={email}
           onChange={handleChangeEmail}
+          className={globalStyle.inputStyle}
         />
         <ErrorMessage errorMessage={isEmailSuccess.errorMessage} />
         <Input
@@ -63,13 +65,18 @@ function SignIn() {
           id="signup__password-input"
           value={password}
           onChange={handleChangePassword}
+          className={globalStyle.inputStyle}
         />
         <ErrorMessage errorMessage={isPasswordSuccess.errorMessage} />
         <ErrorMessage errorMessage={errorMessage} />
         <p>
           <Link to="/signup">회원가입하러가기</Link>
         </p>
-        <SubmitButton dataTestid="signin-button" isSuccess={isSuccess}>
+        <SubmitButton
+          dataTestid="signin-button"
+          isSuccess={isSuccess}
+          className={globalStyle.buttonStyle}
+        >
           Sign In
         </SubmitButton>
       </form>

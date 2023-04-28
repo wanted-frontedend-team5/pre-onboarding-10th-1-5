@@ -3,6 +3,7 @@ import DefaultButton from 'components/button/DefaultButton';
 import SubmitButton from 'components/button/SubmitButton';
 import Input from 'components/input/Input';
 import useInput from 'hooks/useInput';
+import globalStyle from 'utils/globalStyle';
 
 function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
   const [{ modifyTodo }, onChange, setValue] = useInput({
@@ -34,17 +35,24 @@ function ModifyTodoForm({ todo, refreshHandler, closeHandler }) {
     >
       <Input
         type="text"
-        label="수정할 Todo 작성"
         dataTestid="modify-input"
         name="modifyTodo"
         id="modifyTodo"
         value={modifyTodo}
         onChange={onChange}
+        className={globalStyle.smInputStyle}
       />
-      <SubmitButton dataTestid="submit-button">제출</SubmitButton>
-      <DefaultButton dataTestid="cancel-button" onClick={closeHandler}>
-        취소
-      </DefaultButton>
+      <div>
+        <SubmitButton
+          dataTestid="submit-button"
+          className={globalStyle.smButtonStyle}
+        >
+          제출
+        </SubmitButton>
+        <DefaultButton dataTestid="cancel-button" onClick={closeHandler}>
+          취소
+        </DefaultButton>
+      </div>
     </form>
   );
 }

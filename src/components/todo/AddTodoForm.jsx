@@ -2,6 +2,7 @@ import todoApi from 'api/todo';
 import Input from 'components/input/Input';
 import SubmitButton from 'components/button/SubmitButton';
 import useInput from 'hooks/useInput';
+import globalStyle from 'utils/globalStyle';
 
 function AddTodoForm({ refreshHandler }) {
   const [{ todo }, onChange, setValue] = useInput({ todo: '' });
@@ -17,16 +18,21 @@ function AddTodoForm({ refreshHandler }) {
   };
 
   return (
-    <form onSubmit={todoSubmitHandler}>
+    <form onSubmit={todoSubmitHandler} className="w-full flex justify-between">
       <Input
         type="text"
-        label="할 일 작성"
         dataTestid="new-todo-input"
         name="todo"
         value={todo}
         onChange={onChange}
+        className={globalStyle.inputStyle}
       />
-      <SubmitButton dataTestid="new-todo-add-button">추가</SubmitButton>
+      <SubmitButton
+        dataTestid="new-todo-add-button"
+        className={globalStyle.buttonStyle}
+      >
+        추가
+      </SubmitButton>
     </form>
   );
 }

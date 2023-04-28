@@ -1,5 +1,3 @@
-import globalStyle from 'utils/globalStyle';
-
 function Input({
   dataTestid,
   type,
@@ -22,9 +20,7 @@ function Input({
         id={id}
         name={name}
         value={value}
-        className={`${globalStyle.inputStyle}${
-          disabled ? 'bg-gray-100' : 'bg-white'
-        } ${className}`}
+        className={`${className}${disabled ? 'bg-gray-100' : 'bg-white'}`}
       />
     </label>
   );
