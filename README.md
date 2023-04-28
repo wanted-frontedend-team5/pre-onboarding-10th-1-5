@@ -101,9 +101,8 @@ npm start
 
 
 ## [Api] Best Practice 요소
-
-**api 사용에 필요한 파일들을 api 폴더에 별도로 분리**
-**axiosInstance.js**
+<div>**api 사용에 필요한 파일들을 api 폴더에 별도로 분리**</div>
+<div>**axiosInstance.js**</div>
 - api를 활용하는 함수를 사용하기 위한 전처리 과정.
 - 공통적으로 요청 시 사용하는 헤더부분을 axios.create으로 지정.
 - axios의 interceptors 메서드를 통해 access_token이 필요한 경우의 api 설정을 처리.
