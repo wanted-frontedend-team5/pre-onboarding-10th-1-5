@@ -1,8 +1,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { getUserTokenInLocalStorage } from '../../../utils/localTokenUtils';
 
 export default function ProtectedRoute({ children }) {
-  const token = localStorage.getItem('access_token');
+  const token = getUserTokenInLocalStorage();
 
   if (!token) {
     return <Navigate to="/signin" />;
